@@ -1,10 +1,35 @@
 # Copyrighted assets — not for distribution
 *.pdf
-cards/major/
-cards/minor/
-cards/court/
-cards/backs/
-tokens/coin/
+cards/major/*.png
+cards/major/*.jpg
+cards/major/*.jpeg
+cards/major/*.webp
+cards/major/*.svg
+cards/major/*.gif
+cards/minor/*.png
+cards/minor/*.jpg
+cards/minor/*.jpeg
+cards/minor/*.webp
+cards/minor/*.svg
+cards/minor/*.gif
+cards/court/*.png
+cards/court/*.jpg
+cards/court/*.jpeg
+cards/court/*.webp
+cards/court/*.svg
+cards/court/*.gif
+cards/backs/*.png
+cards/backs/*.jpg
+cards/backs/*.jpeg
+cards/backs/*.webp
+cards/backs/*.svg
+cards/backs/*.gif
+tokens/coin/*.png
+tokens/coin/*.jpg
+tokens/coin/*.jpeg
+tokens/coin/*.webp
+tokens/coin/*.svg
+tokens/coin/*.gif
 
 # Claude Code
 CLAUDE.md
