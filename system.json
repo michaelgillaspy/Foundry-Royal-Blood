@@ -1,15 +1,19 @@
 {
   "id": "royal-blood",
   "title": "Royal Blood",
-  "description": "An unofficial Foundry VTT system for Royal Blood by Rowan, Rook & Decard and Mana Project Studios.",
+  "description": "An unofficial Foundry VTT system for Royal Blood, the tarot heist RPG by Rowan, Rook & Decard and Mana Project Studio.",
   "version": "0.1.0",
+  "url": "https://github.com/michaelgillaspy/foundry-royal-blood",
+  "manifest": "https://github.com/michaelgillaspy/foundry-royal-blood/releases/latest/download/system.json",
+  "download": "https://github.com/michaelgillaspy/foundry-royal-blood/releases/latest/download/royal-blood.zip",
   "compatibility": {
     "minimum": "12",
     "verified": "12"
   },
   "authors": [
     {
-      "name": "Foundry-Royal-Blood Contributors"
+      "name": "Michael Gillaspy",
+      "url": "https://github.com/michaelgillaspy"
     }
   ],
   "esmodules": ["module/royal-blood.mjs"],
