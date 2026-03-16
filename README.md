@@ -176,3 +176,5 @@ Each character has:
 ## Credits
 
 Royal Blood is published by [Rowan, Rook & Decard](https://rowanrookanddecard.com/) in partnership with [Mana Project Studio](https://www.manaprojectstudio.com/). This is an unofficial, fan-made system and is not affiliated with or endorsed by the publishers.
+
+Built with the assistance of [Claude Code](https://claude.ai/code) (AI pair programming).
