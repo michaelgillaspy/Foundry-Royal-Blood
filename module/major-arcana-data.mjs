@@ -195,13 +195,18 @@ export async function loadArcanaData() {
 
   let customData = [];
   try {
-    const response = await fetch(CUSTOM_DATA_PATH);
-    if (response.ok) {
-      customData = await response.json();
-      console.log(`Royal Blood | Loaded custom arcana data (${customData.length} entries).`);
+    // Check if file exists before fetching to avoid 404 console noise
+    const check = await foundry.applications.apps.FilePicker.implementation.browse("data", "systems/royal-blood/cards", { extensions: [".json"] });
+    const hasCustom = check.files?.some(f => f.endsWith("major-arcana-data.json"));
+    if (hasCustom) {
+      const response = await fetch(CUSTOM_DATA_PATH);
+      if (response.ok) {
+        customData = await response.json();
+        console.log(`Royal Blood | Loaded custom arcana data (${customData.length} entries).`);
+      }
     }
   } catch {
-    // No custom file — use defaults only
+    // No custom file or folder not browsable — use defaults only
   }
 
   // Start with built-in data, override with custom entries by name match
