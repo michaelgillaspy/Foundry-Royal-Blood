@@ -9,7 +9,7 @@ import { MAJOR_ARCANA, findArcanaData } from "./major-arcana-data.mjs";
 
 const CARD_TILE_WIDTH = 420;
 const CARD_TILE_HEIGHT = 720;
-const NOTE_WIDTH = 500;
+const NOTE_WIDTH = 420;
 const NOTE_SPACING = 20;
 const NOTES_FOLDER = "royal-blood-notes";
 const BACKS_FOLDER = "systems/royal-blood/cards/backs";
