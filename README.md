@@ -2,7 +2,7 @@
 
 An unofficial Foundry VTT system for **Royal Blood**, the tarot heist RPG by Mana Project Studio and Rowan, Rook & Decard. Requires **Foundry VTT v12**.
 
-> **Note:** This system does not include card artwork. You must supply your own tarot card images — any standard 22-card Major Arcana and 56-card Minor Arcana deck will work.
+> **Note:** This system does not include card artwork. You must supply your own tarot card images — any standard Tarot deck will work.
 
 ## Installation
 
