@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch(domain:www.foundryvtt-hub.com)",
+      "WebFetch(domain:github.com)",
+      "Read(//c/Program Files/Foundry Virtual Tabletop/resources/app/public/icons/svg/**)",
+      "Read(//c/Program Files/Foundry Virtual Tabletop/resources/app/templates/scene/drawing/**)"
+    ]
+  }
+}

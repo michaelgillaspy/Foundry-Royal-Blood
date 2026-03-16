@@ -1,0 +1,20 @@
+<header class="sheet-header">
+  <div class="header-fields">
+    <div class="field">
+      <label>{{localize "ROYALBLOOD.Rank"}}</label>
+      <input type="text" name="system.rank" value="{{system.rank}}" placeholder="{{localize 'ROYALBLOOD.Rank'}}"/>
+    </div>
+    <div class="field">
+      <label>{{localize "ROYALBLOOD.Names"}}</label>
+      <input type="text" name="name" value="{{actor.name}}" placeholder="{{localize 'ROYALBLOOD.Names'}}"/>
+    </div>
+    <div class="field">
+      <label>{{localize "ROYALBLOOD.Coins"}}</label>
+      <input type="number" value="{{system.coins}}" disabled/>
+    </div>
+    <div class="field">
+      <label>{{localize "ROYALBLOOD.Description"}}</label>
+      <textarea name="system.description" rows="2" placeholder="{{localize 'ROYALBLOOD.Description'}}">{{system.description}}</textarea>
+    </div>
+  </div>
+</header>

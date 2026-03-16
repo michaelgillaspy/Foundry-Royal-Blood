@@ -1,0 +1,20 @@
+# Copyrighted assets — not for distribution
+*.pdf
+cards/major/
+cards/minor/
+cards/court/
+cards/backs/
+tokens/coin/
+
+# Claude Code
+CLAUDE.md
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# Editor files
+.vscode/
+*.code-workspace
+*.swp
+*.swo

@@ -1,0 +1,33 @@
+{
+  "id": "royal-blood",
+  "title": "Royal Blood",
+  "description": "An unofficial Foundry VTT system for Royal Blood by Rowan, Rook & Decard and Mana Project Studios.",
+  "version": "0.1.0",
+  "compatibility": {
+    "minimum": "12",
+    "verified": "12"
+  },
+  "authors": [
+    {
+      "name": "Foundry-Royal-Blood Contributors"
+    }
+  ],
+  "esmodules": ["module/royal-blood.mjs"],
+  "styles": ["css/royal-blood.css"],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ],
+  "packs": [],
+  "socket": true,
+  "grid": {
+    "type": 1,
+    "distance": 5,
+    "units": "ft"
+  },
+  "primaryTokenAttribute": null,
+  "secondaryTokenAttribute": null
+}

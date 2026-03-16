@@ -1,0 +1,585 @@
+/* ========================================
+   Royal Blood — Foundry VTT System Styles
+   ======================================== */
+
+/* --- Variables (Parchment — default) --- */
+:root,
+body.royal-blood-parchment {
+  --rb-bg: #f5f0e8;
+  --rb-bg-dark: #e8e0d0;
+  --rb-text: #1a1a1a;
+  --rb-text-muted: #555;
+  --rb-border: #2a2a2a;
+  --rb-border-light: #aaa;
+  --rb-accent: #4a4a4a;
+  --rb-highlight: #c9a84c;
+  --rb-danger: #8b2020;
+  --rb-card-bg: #faf8f3;
+  --rb-font: "Signika", "Palatino Linotype", serif;
+}
+
+/* --- Variables (Dark) --- */
+body.royal-blood-dark {
+  --rb-bg: #1a1a1a;
+  --rb-bg-dark: #111111;
+  --rb-text: #e8e4dc;
+  --rb-text-muted: #999;
+  --rb-border: #c0c0c0;
+  --rb-border-light: #555;
+  --rb-accent: #999;
+  --rb-highlight: #c0c0c0;
+  --rb-danger: #cc4444;
+  --rb-card-bg: #222222;
+}
+
+/* --- Variables (Light) --- */
+body.royal-blood-light {
+  --rb-bg: #faf9f6;
+  --rb-bg-dark: #eeecea;
+  --rb-text: #1a1a1a;
+  --rb-text-muted: #666;
+  --rb-border: #2a2a2a;
+  --rb-border-light: #bbb;
+  --rb-accent: #777;
+  --rb-highlight: #a8a8a8;
+  --rb-danger: #8b2020;
+  --rb-card-bg: #f0efec;
+}
+
+/* --- Theme-specific overrides for Foundry defaults --- */
+body.royal-blood-dark .royal-blood.sheet,
+body.royal-blood-dark .royal-blood.sheet .window-content,
+body.royal-blood-dark .royal-blood.sheet input,
+body.royal-blood-dark .royal-blood.sheet textarea,
+body.royal-blood-dark .royal-blood.sheet select,
+body.royal-blood-dark .royal-blood.sheet label,
+body.royal-blood-dark .royal-blood.sheet h1,
+body.royal-blood-dark .royal-blood.sheet h2,
+body.royal-blood-dark .royal-blood.sheet h3,
+body.royal-blood-dark .royal-blood.sheet h4,
+body.royal-blood-dark .royal-blood.sheet p {
+  color: var(--rb-text);
+}
+
+body.royal-blood-dark .royal-blood.sheet input::placeholder,
+body.royal-blood-dark .royal-blood.sheet textarea::placeholder {
+  color: var(--rb-text-muted);
+}
+
+body.royal-blood-dark .royal-blood.sheet .window-content,
+body.royal-blood-dark .royal-blood.sheet .royal-box,
+body.royal-blood-dark .royal-blood.sheet .facet-card,
+body.royal-blood-dark .royal-blood.sheet .notes-column,
+body.royal-blood-dark .royal-blood.sheet .twist-table,
+body.royal-blood-dark .royal-blood.sheet .twist-table th,
+body.royal-blood-dark .royal-blood.sheet .value-table,
+body.royal-blood-dark .royal-blood.sheet .value-table th {
+  background: var(--rb-card-bg);
+}
+
+body.royal-blood-light .royal-blood.sheet input::placeholder,
+body.royal-blood-light .royal-blood.sheet textarea::placeholder {
+  color: var(--rb-text-muted);
+}
+
+/* --- Base Sheet --- */
+.royal-blood.sheet {
+  font-family: var(--rb-font);
+  color: var(--rb-text);
+  background: var(--rb-bg);
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.royal-blood.sheet h1,
+.royal-blood.sheet h2,
+.royal-blood.sheet h3,
+.royal-blood.sheet h4 {
+  color: var(--rb-text);
+}
+
+.royal-blood.sheet .window-content {
+  color: var(--rb-text);
+  background: var(--rb-bg);
+}
+
+.royal-blood.sheet input,
+.royal-blood.sheet textarea,
+.royal-blood.sheet select {
+  font-family: var(--rb-font);
+  font-size: 14px;
+  color: var(--rb-text);
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--rb-border-light);
+  padding: 2px 4px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.royal-blood.sheet input:focus,
+.royal-blood.sheet textarea:focus {
+  outline: none;
+  border-bottom-color: var(--rb-border);
+}
+
+.royal-blood.sheet textarea {
+  border: 1px solid var(--rb-border-light);
+  resize: vertical;
+  padding: 4px 6px;
+}
+
+.royal-blood.sheet label {
+  font-weight: 600;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--rb-text-muted);
+  display: block;
+  margin-bottom: 2px;
+}
+
+/* --- Sheet Header --- */
+.royal-blood .sheet-header {
+  padding: 10px 12px;
+  border-bottom: 2px solid var(--rb-border);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.royal-blood .header-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr 80px;
+  grid-template-rows: auto auto;
+  gap: 6px 16px;
+  width: 100%;
+}
+
+.royal-blood .header-fields .field:nth-child(1) {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.royal-blood .header-fields .field:nth-child(2) {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.royal-blood .header-fields .field:nth-child(3) {
+  grid-column: 3;
+  grid-row: 1;
+  text-align: center;
+}
+
+.royal-blood .header-fields .field:nth-child(3) input {
+  text-align: center;
+  width: 60px;
+  margin: 0 auto;
+}
+
+.royal-blood .header-fields .field:nth-child(4) {
+  grid-column: 1 / 4;
+  grid-row: 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.royal-blood .header-fields .field:nth-child(4) textarea {
+  flex: 1;
+  min-height: 40px;
+}
+
+/* --- Tabs --- */
+.royal-blood.sheet .sheet-tabs,
+.royal-blood.sheet nav.tabs,
+.royal-blood.sheet .tabs {
+  border-bottom: 2px solid var(--rb-border);
+  margin: 0;
+  padding: 0 12px;
+  background: var(--rb-bg-dark);
+}
+
+.royal-blood.sheet .sheet-tabs .item,
+.royal-blood.sheet nav.tabs .item,
+.royal-blood.sheet .tabs .item,
+.royal-blood.sheet .tabs a {
+  font-family: var(--rb-font);
+  font-variant: small-caps;
+  font-size: 16px;
+  padding: 4px 16px;
+  color: var(--rb-text-muted) !important;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  text-shadow: none !important;
+}
+
+.royal-blood.sheet .sheet-tabs .item.active,
+.royal-blood.sheet nav.tabs .item.active,
+.royal-blood.sheet .tabs .item.active,
+.royal-blood.sheet .tabs a.active {
+  color: var(--rb-text) !important;
+  border-bottom: 2px solid var(--rb-border);
+  text-shadow: none !important;
+}
+
+/* --- Sheet Body --- */
+.royal-blood .sheet-body {
+  padding: 12px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.royal-blood.sheet .tab.front,
+.royal-blood.sheet .tab.back {
+  padding: 12px;
+}
+
+/* --- Facets Row: 3 columns --- */
+.royal-blood .facets-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+/* --- Royals Row: 2 columns --- */
+.royal-blood .royals-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.royal-blood .royal-box {
+  background: var(--rb-card-bg);
+  border: 1px solid var(--rb-border);
+  padding: 10px;
+}
+
+.royal-blood .royal-box h2 {
+  font-family: var(--rb-font);
+  font-variant: small-caps;
+  font-size: 18px;
+  font-weight: normal;
+  margin: 0 0 8px;
+  text-align: center;
+  border-bottom: 1px solid var(--rb-border-light);
+  padding-bottom: 6px;
+}
+
+.royal-blood .royal-box .field {
+  margin-bottom: 6px;
+}
+
+.royal-blood .section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.royal-blood .section-header h2 {
+  font-family: var(--rb-font);
+  font-variant: small-caps;
+  font-size: 20px;
+  font-weight: normal;
+  margin: 0;
+}
+
+.royal-blood .section-header .item-create {
+  cursor: pointer;
+  color: var(--rb-accent);
+  font-size: 14px;
+}
+
+.royal-blood .section-header .item-create:hover {
+  color: var(--rb-highlight);
+}
+
+/* --- Facet Cards --- */
+.royal-blood .facet-card {
+  background: var(--rb-card-bg);
+  border: 1px solid var(--rb-border);
+  padding: 10px;
+  margin-bottom: 8px;
+}
+
+.royal-blood .facet-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+  border-bottom: 1px solid var(--rb-border-light);
+  padding-bottom: 4px;
+}
+
+.royal-blood .facet-title {
+  font-family: var(--rb-font);
+  font-variant: small-caps;
+  font-size: 18px;
+}
+
+.royal-blood .facet-checks {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 8px;
+  margin: 6px 0;
+  text-align: center;
+}
+
+.royal-blood .facet-checks.facet-checks-2col {
+  grid-template-columns: 1fr 1fr;
+}
+
+.royal-blood .facet-check {
+  text-align: center;
+}
+
+.royal-blood .facet-check a,
+.royal-blood .toggle-cell a {
+  cursor: pointer;
+  color: var(--rb-accent);
+  font-size: 16px;
+}
+
+.royal-blood .facet-check a:hover,
+.royal-blood .toggle-cell a:hover {
+  color: var(--rb-highlight);
+}
+
+/* --- Item Controls --- */
+.royal-blood .item-controls {
+  display: flex;
+  gap: 6px;
+}
+
+.royal-blood .item-controls a {
+  cursor: pointer;
+  color: var(--rb-text-muted);
+  font-size: 12px;
+}
+
+.royal-blood .item-controls a:hover {
+  color: var(--rb-danger);
+}
+
+/* --- Back Tab Layout --- */
+.royal-blood .back-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* --- Twists Table --- */
+.royal-blood .twist-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--rb-card-bg);
+  border: 1px solid var(--rb-border);
+}
+
+.royal-blood .twist-table th {
+  font-family: var(--rb-font);
+  font-variant: small-caps;
+  font-size: 14px;
+  text-transform: none;
+  font-weight: normal;
+  letter-spacing: 0;
+  padding: 6px 8px;
+  border-bottom: 2px solid var(--rb-border);
+  text-align: left;
+  color: var(--rb-text-muted);
+  background: var(--rb-card-bg);
+}
+
+.royal-blood .twist-table td {
+  padding: 4px 8px;
+  border-bottom: 1px solid var(--rb-border-light);
+}
+
+.royal-blood .twist-table input {
+  border: 1px solid var(--rb-border-light);
+  padding: 2px 6px;
+}
+
+.royal-blood .toggle-cell {
+  text-align: center;
+  width: 50px;
+}
+
+/* --- Value Reference Table --- */
+.royal-blood .value-section h2 {
+  font-family: var(--rb-font);
+  font-variant: small-caps;
+  font-size: 20px;
+  font-weight: normal;
+  margin: 0 0 8px;
+}
+
+.royal-blood .value-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--rb-card-bg);
+  border: 1px solid var(--rb-border);
+}
+
+.royal-blood .value-table th {
+  font-family: var(--rb-font);
+  font-variant: small-caps;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 10px;
+  border-bottom: 2px solid var(--rb-border);
+  text-align: left;
+  color: var(--rb-text-muted);
+  background: var(--rb-card-bg);
+}
+
+.royal-blood .value-table td {
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--rb-border-light);
+  vertical-align: top;
+}
+
+.royal-blood .value-rank {
+  font-weight: 600;
+  width: 60px;
+  text-align: center;
+  font-size: 15px;
+}
+
+.royal-blood .value-effect {
+  font-weight: 600;
+  white-space: nowrap;
+  width: 170px;
+}
+
+.royal-blood .value-instructions {
+  font-size: 13px;
+  font-style: italic;
+  color: var(--rb-text-muted);
+}
+
+/* --- Notes Section --- */
+.royal-blood .notes-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.royal-blood .notes-column {
+  background: var(--rb-card-bg);
+  border: 1px solid var(--rb-border);
+  padding: 10px;
+}
+
+.royal-blood .notes-column h2 {
+  font-family: var(--rb-font);
+  font-variant: small-caps;
+  font-size: 20px;
+  font-weight: normal;
+  margin: 0 0 6px;
+}
+
+.royal-blood .notes-column textarea {
+  width: 100%;
+  min-height: 100px;
+}
+
+/* --- Item Sheets (Facet / Twist pop-outs) --- */
+.royal-blood.sheet.item .sheet-header {
+  padding: 8px 12px;
+}
+
+.royal-blood.sheet.item .sheet-body {
+  padding: 12px;
+}
+
+.royal-blood.sheet.item .sheet-body .field {
+  margin-bottom: 8px;
+}
+
+.royal-blood.sheet.item .facet-checks {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.royal-blood.sheet.item .facet-checks .field {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.royal-blood.sheet.item .facet-checks input[type="checkbox"] {
+  width: auto;
+}
+
+/* --- Arcana Sheet --- */
+.royal-blood.sheet.arcana .arcana-header {
+  padding: 12px 16px;
+  border-bottom: 2px solid var(--rb-border);
+  text-align: center;
+}
+
+.royal-blood.sheet.arcana .arcana-name {
+  font-family: var(--rb-font);
+  font-variant: small-caps;
+  font-size: 24px;
+  margin: 0;
+}
+
+.royal-blood.sheet.arcana .arcana-subtitle {
+  font-family: var(--rb-font);
+  font-variant: small-caps;
+  font-size: 16px;
+  color: var(--rb-text-muted);
+  margin: 4px 0 0;
+  font-weight: normal;
+}
+
+.royal-blood.sheet.arcana .arcana-body {
+  padding: 12px 16px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.royal-blood.sheet.arcana .arcana-description {
+  font-style: italic;
+  line-height: 1.5;
+  margin: 0 0 12px;
+}
+
+.royal-blood.sheet.arcana .arcana-examples {
+  margin-bottom: 16px;
+}
+
+.royal-blood.sheet.arcana .arcana-example h3 {
+  font-family: var(--rb-font);
+  font-variant: small-caps;
+  font-size: 14px;
+  margin: 8px 0 2px;
+  color: var(--rb-accent);
+}
+
+.royal-blood.sheet.arcana .arcana-example p {
+  font-size: 13px;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.royal-blood.sheet.arcana .arcana-notes h3 {
+  font-family: var(--rb-font);
+  font-variant: small-caps;
+  font-size: 16px;
+  margin: 0 0 6px;
+  border-top: 1px solid var(--rb-border-light);
+  padding-top: 12px;
+}
+
+.royal-blood.sheet.arcana .arcana-notes textarea {
+  width: 100%;
+  min-height: 100px;
+}

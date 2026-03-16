@@ -1,0 +1,63 @@
+{
+  "Actor": {
+    "types": ["character", "coin", "arcana"],
+    "character": {
+      "rank": "",
+      "description": "",
+      "royalLeft": {
+        "name": "",
+        "question": "",
+        "answer": ""
+      },
+      "royalRight": {
+        "name": "",
+        "question": "",
+        "answer": ""
+      },
+      "facet1": {
+        "name": "",
+        "lead": false,
+        "silver": false,
+        "marked": false,
+        "lost": false,
+        "description": ""
+      },
+      "facet2": {
+        "name": "",
+        "lead": false,
+        "silver": false,
+        "marked": false,
+        "lost": false,
+        "description": ""
+      },
+      "facet3": {
+        "name": "",
+        "lead": false,
+        "silver": false,
+        "marked": false,
+        "lost": false,
+        "description": ""
+      },
+      "coins": 0,
+      "secrets": "",
+      "notes": ""
+    },
+    "coin": {},
+    "arcana": {
+      "subtitle": "",
+      "description": "",
+      "person": "",
+      "location": "",
+      "object": "",
+      "notes": "",
+      "flipped": false
+    }
+  },
+  "Item": {
+    "types": ["twist"],
+    "twist": {
+      "effect": "",
+      "used": false
+    }
+  }
+}

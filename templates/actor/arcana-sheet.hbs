@@ -1,0 +1,34 @@
+<div class="arcana-wrapper">
+  <header class="sheet-header arcana-header">
+    <h1 class="arcana-name">{{actor.name}}</h1>
+    <h2 class="arcana-subtitle">{{system.subtitle}}</h2>
+  </header>
+
+  <section class="sheet-body arcana-body">
+
+    <div class="arcana-reference">
+      <p class="arcana-description">{{system.description}}</p>
+
+      <div class="arcana-examples">
+        <div class="arcana-example">
+          <h3>{{localize "ROYALBLOOD.Person"}}</h3>
+          <p>{{system.person}}</p>
+        </div>
+        <div class="arcana-example">
+          <h3>{{localize "ROYALBLOOD.Location"}}</h3>
+          <p>{{system.location}}</p>
+        </div>
+        <div class="arcana-example">
+          <h3>{{localize "ROYALBLOOD.Object"}}</h3>
+          <p>{{system.object}}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="arcana-notes">
+      <h3>{{localize "ROYALBLOOD.Notes"}}</h3>
+      <textarea name="system.notes" rows="6" placeholder="Add notes as you flesh out this icon...">{{system.notes}}</textarea>
+    </div>
+
+  </section>
+</div>

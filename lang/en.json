@@ -1,0 +1,67 @@
+{
+  "ROYALBLOOD.SheetCharacter": "Royal Blood Character Sheet",
+  "ROYALBLOOD.SheetTwist": "Twist Sheet",
+
+  "ROYALBLOOD.TabFront": "Character",
+  "ROYALBLOOD.TabBack": "Twists & Notes",
+
+  "ROYALBLOOD.Rank": "Rank",
+  "ROYALBLOOD.Names": "Name(s)",
+  "ROYALBLOOD.Name": "Name",
+  "ROYALBLOOD.Coins": "Coins",
+  "ROYALBLOOD.Description": "Description",
+
+  "ROYALBLOOD.RoyalToYourLeft": "Royal to your Left",
+  "ROYALBLOOD.RoyalToYourRight": "Royal to your Right",
+  "ROYALBLOOD.Question": "Question",
+  "ROYALBLOOD.TheirAnswer": "Their Answer",
+
+  "ROYALBLOOD.Facet": "Facet",
+  "ROYALBLOOD.Lead": "Lead",
+  "ROYALBLOOD.Silver": "Silver",
+  "ROYALBLOOD.Marked": "Marked",
+  "ROYALBLOOD.Lost": "Lost",
+
+  "ROYALBLOOD.Twists": "Twists",
+  "ROYALBLOOD.AddTwist": "Add Twist",
+  "ROYALBLOOD.Effect": "Effect",
+  "ROYALBLOOD.Used": "Used",
+
+  "ROYALBLOOD.Value": "Value",
+  "ROYALBLOOD.ValueHeader": "Value",
+  "ROYALBLOOD.Outcome": "Outcome",
+  "ROYALBLOOD.Instructions": "Instructions",
+  "ROYALBLOOD.Court": "Court",
+  "ROYALBLOOD.Ace": "Ace",
+  "ROYALBLOOD.Joker": "Joker",
+
+  "ROYALBLOOD.ValueMakeWorse": "Make things worse",
+  "ROYALBLOOD.ValueMakeWorseDesc": "Fate Herself adds a coin to the Icon. What did you do? How did your facet, or the situation, turn against you? What didn't you notice in time? Who can help you out?",
+  "ROYALBLOOD.ValueMakeProgress": "Make progress",
+  "ROYALBLOOD.ValueMakeProgressDesc": "Fate Herself discards a coin from the Icon. How did you make an impact? How do nearby people react? Who's up next?",
+  "ROYALBLOOD.ValueSeizeAdvantage": "Seize the advantage",
+  "ROYALBLOOD.ValueSeizeAdvantageDesc": "Fate Herself takes a coin from the Icon and gives it to you. What treasure or benefit did you uncover? How does the opposition feel about this?",
+  "ROYALBLOOD.ValueTakeForOwn": "Take it for your own",
+  "ROYALBLOOD.ValueTakeForOwnDesc": "Fate Herself discards a coin from the Icon. After this obstacle is resolved, you get the card, and it acts as an additional Twist. What leverage have you got over them? What abilities will they be able to lend to your cause?",
+  "ROYALBLOOD.ValueMakeInteresting": "Make things interesting",
+  "ROYALBLOOD.ValueMakeInterestingDesc": "Fate Herself draws three cards and lays face-up. You choose one, She chooses another, and we resolve both at once.",
+
+  "ROYALBLOOD.Secrets": "Secrets",
+  "ROYALBLOOD.Notes": "Notes",
+
+  "ROYALBLOOD.Person": "Person",
+  "ROYALBLOOD.Location": "Location",
+  "ROYALBLOOD.Object": "Object",
+  "ROYALBLOOD.SheetArcana": "Major Arcana Sheet",
+
+  "ROYALBLOOD.Edit": "Edit",
+  "ROYALBLOOD.Delete": "Delete",
+  "ROYALBLOOD.NewItem": "New {type}",
+
+  "ROYALBLOOD.MajorArcana": "Major Arcana",
+  "ROYALBLOOD.MinorArcana": "Minor Arcana",
+  "ROYALBLOOD.CourtCards": "Court Cards",
+  "ROYALBLOOD.FatesTable": "Fate's Table",
+
+  "ITEM.TypeTwist": "Twist"
+}

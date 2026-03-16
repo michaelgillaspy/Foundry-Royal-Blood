@@ -1,0 +1,18 @@
+<header class="sheet-header">
+  <div class="field">
+    <label>{{localize "ROYALBLOOD.Name"}}</label>
+    <input type="text" name="name" value="{{item.name}}"/>
+  </div>
+</header>
+
+<section class="sheet-body">
+  <div class="field">
+    <label>{{localize "ROYALBLOOD.Effect"}}</label>
+    <textarea name="system.effect" rows="3">{{system.effect}}</textarea>
+  </div>
+
+  <div class="field">
+    <label>{{localize "ROYALBLOOD.Used"}}</label>
+    <input type="checkbox" name="system.used" {{checked system.used}}/>
+  </div>
+</section>

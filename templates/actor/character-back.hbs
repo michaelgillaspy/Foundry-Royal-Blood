@@ -1,0 +1,101 @@
+<section class="tab back {{tab.cssClass}}" data-group="primary" data-tab="back">
+  <div class="back-layout">
+
+    {{!-- Twists --}}
+    <div class="twists-section">
+      <div class="section-header">
+        <h2>{{localize "ROYALBLOOD.Twists"}}</h2>
+        <a data-action="itemCreate" data-type="twist" title="{{localize 'ROYALBLOOD.AddTwist'}}">
+          <i class="fas fa-plus"></i>
+        </a>
+      </div>
+      <table class="twist-table item-list">
+        <thead>
+          <tr>
+            <th>{{localize "ROYALBLOOD.Name"}}</th>
+            <th>{{localize "ROYALBLOOD.Effect"}}</th>
+            <th>{{localize "ROYALBLOOD.Used"}}</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each twists as |twist|}}
+          <tr class="item" data-item-id="{{twist._id}}">
+            <td>
+              <input type="text" class="item-inline-edit" data-field="name"
+                value="{{twist.name}}" data-dtype="String"/>
+            </td>
+            <td>
+              <input type="text" class="item-inline-edit" data-field="effect"
+                value="{{twist.system.effect}}"/>
+            </td>
+            <td class="toggle-cell">
+              <a data-action="itemToggle" data-field="used">
+                <i class="{{#if twist.system.used}}fas fa-check-circle{{else}}far fa-circle{{/if}}"></i>
+              </a>
+            </td>
+            <td class="item-controls">
+              <a data-action="itemEdit" title="{{localize 'ROYALBLOOD.Edit'}}"><i class="fas fa-edit"></i></a>
+              <a data-action="itemDelete" title="{{localize 'ROYALBLOOD.Delete'}}"><i class="fas fa-trash"></i></a>
+            </td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+
+    {{!-- Value Reference --}}
+    <div class="value-section">
+      <h2>{{localize "ROYALBLOOD.Value"}}</h2>
+      <table class="value-table">
+        <thead>
+          <tr>
+            <th>{{localize "ROYALBLOOD.ValueHeader"}}</th>
+            <th>{{localize "ROYALBLOOD.Outcome"}}</th>
+            <th>{{localize "ROYALBLOOD.Instructions"}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="value-rank">2–5</td>
+            <td class="value-effect">{{localize "ROYALBLOOD.ValueMakeWorse"}}</td>
+            <td class="value-instructions">{{localize "ROYALBLOOD.ValueMakeWorseDesc"}}</td>
+          </tr>
+          <tr>
+            <td class="value-rank">6–10</td>
+            <td class="value-effect">{{localize "ROYALBLOOD.ValueMakeProgress"}}</td>
+            <td class="value-instructions">{{localize "ROYALBLOOD.ValueMakeProgressDesc"}}</td>
+          </tr>
+          <tr>
+            <td class="value-rank">{{localize "ROYALBLOOD.Court"}}</td>
+            <td class="value-effect">{{localize "ROYALBLOOD.ValueSeizeAdvantage"}}</td>
+            <td class="value-instructions">{{localize "ROYALBLOOD.ValueSeizeAdvantageDesc"}}</td>
+          </tr>
+          <tr>
+            <td class="value-rank">{{localize "ROYALBLOOD.Ace"}}</td>
+            <td class="value-effect">{{localize "ROYALBLOOD.ValueTakeForOwn"}}</td>
+            <td class="value-instructions">{{localize "ROYALBLOOD.ValueTakeForOwnDesc"}}</td>
+          </tr>
+          <tr>
+            <td class="value-rank">{{localize "ROYALBLOOD.Joker"}}</td>
+            <td class="value-effect">{{localize "ROYALBLOOD.ValueMakeInteresting"}}</td>
+            <td class="value-instructions">{{localize "ROYALBLOOD.ValueMakeInterestingDesc"}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    {{!-- Secrets & Notes --}}
+    <div class="notes-section">
+      <div class="notes-column">
+        <h2>{{localize "ROYALBLOOD.Secrets"}}</h2>
+        <textarea name="system.secrets" rows="5">{{system.secrets}}</textarea>
+      </div>
+      <div class="notes-column">
+        <h2>{{localize "ROYALBLOOD.Notes"}}</h2>
+        <textarea name="system.notes" rows="5">{{system.notes}}</textarea>
+      </div>
+    </div>
+
+  </div>
+</section>

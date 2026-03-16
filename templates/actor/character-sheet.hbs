@@ -1,0 +1,301 @@
+<form class="royal-blood sheet actor character" autocomplete="off">
+
+  {{!-- Sheet Header --}}
+  <header class="sheet-header">
+    <div class="header-fields">
+      <div class="field">
+        <label>{{localize "ROYALBLOOD.Rank"}}</label>
+        <input type="text" name="system.rank" value="{{system.rank}}" placeholder="{{localize 'ROYALBLOOD.Rank'}}"/>
+      </div>
+      <div class="field">
+        <label>{{localize "ROYALBLOOD.Names"}}</label>
+        <input type="text" name="name" value="{{actor.name}}" placeholder="{{localize 'ROYALBLOOD.Names'}}"/>
+      </div>
+      <div class="field">
+        <label>{{localize "ROYALBLOOD.Coins"}}</label>
+        <input type="number" value="{{system.coins}}" disabled/>
+      </div>
+      <div class="field">
+        <label>{{localize "ROYALBLOOD.Description"}}</label>
+        <textarea name="system.description" rows="2" placeholder="{{localize 'ROYALBLOOD.Description'}}">{{system.description}}</textarea>
+      </div>
+    </div>
+  </header>
+
+  {{!-- Sheet Tabs --}}
+  <nav class="sheet-tabs tabs" data-group="primary">
+    <a class="item" data-tab="front">{{localize "ROYALBLOOD.TabFront"}}</a>
+    <a class="item" data-tab="back">{{localize "ROYALBLOOD.TabBack"}}</a>
+  </nav>
+
+  {{!-- Sheet Body --}}
+  <section class="sheet-body">
+
+    {{!-- Front Tab --}}
+    <div class="tab front" data-group="primary" data-tab="front">
+
+      {{!-- Facets Row: 3 columns --}}
+      <div class="facets-row">
+        <div class="facet-card">
+          <div class="facet-header"><span class="facet-title">{{localize "ROYALBLOOD.Facet"}}</span></div>
+          <div class="field">
+            <label>{{localize "ROYALBLOOD.Name"}}</label>
+            <input type="text" name="system.facet1.name" value="{{system.facet1.name}}"/>
+          </div>
+          <div class="facet-checks facet-checks-2col">
+            <div class="facet-check">
+              <label>{{localize "ROYALBLOOD.Lead"}}</label>
+              <a class="facet-toggle" data-facet="facet1" data-field="lead">
+                <i class="{{#if system.facet1.lead}}fas fa-check-circle{{else}}far fa-circle{{/if}}"></i>
+              </a>
+            </div>
+            <div class="facet-check">
+              <label>{{localize "ROYALBLOOD.Silver"}}</label>
+              <a class="facet-toggle" data-facet="facet1" data-field="silver">
+                <i class="{{#if system.facet1.silver}}fas fa-check-circle{{else}}far fa-circle{{/if}}"></i>
+              </a>
+            </div>
+          </div>
+          <div class="facet-checks facet-checks-2col">
+            <div class="facet-check">
+              <label>{{localize "ROYALBLOOD.Marked"}}</label>
+              <a class="facet-toggle" data-facet="facet1" data-field="marked">
+                <i class="{{#if system.facet1.marked}}fas fa-check-circle{{else}}far fa-circle{{/if}}"></i>
+              </a>
+            </div>
+            <div class="facet-check">
+              <label>{{localize "ROYALBLOOD.Lost"}}</label>
+              <a class="facet-toggle" data-facet="facet1" data-field="lost">
+                <i class="{{#if system.facet1.lost}}fas fa-check-circle{{else}}far fa-circle{{/if}}"></i>
+              </a>
+            </div>
+          </div>
+          <div class="field">
+            <label>{{localize "ROYALBLOOD.Description"}}</label>
+            <textarea name="system.facet1.description" rows="2">{{system.facet1.description}}</textarea>
+          </div>
+        </div>
+
+        <div class="facet-card">
+          <div class="facet-header"><span class="facet-title">{{localize "ROYALBLOOD.Facet"}}</span></div>
+          <div class="field">
+            <label>{{localize "ROYALBLOOD.Name"}}</label>
+            <input type="text" name="system.facet2.name" value="{{system.facet2.name}}"/>
+          </div>
+          <div class="facet-checks facet-checks-2col">
+            <div class="facet-check">
+              <label>{{localize "ROYALBLOOD.Lead"}}</label>
+              <a class="facet-toggle" data-facet="facet2" data-field="lead">
+                <i class="{{#if system.facet2.lead}}fas fa-check-circle{{else}}far fa-circle{{/if}}"></i>
+              </a>
+            </div>
+            <div class="facet-check">
+              <label>{{localize "ROYALBLOOD.Silver"}}</label>
+              <a class="facet-toggle" data-facet="facet2" data-field="silver">
+                <i class="{{#if system.facet2.silver}}fas fa-check-circle{{else}}far fa-circle{{/if}}"></i>
+              </a>
+            </div>
+          </div>
+          <div class="facet-checks facet-checks-2col">
+            <div class="facet-check">
+              <label>{{localize "ROYALBLOOD.Marked"}}</label>
+              <a class="facet-toggle" data-facet="facet2" data-field="marked">
+                <i class="{{#if system.facet2.marked}}fas fa-check-circle{{else}}far fa-circle{{/if}}"></i>
+              </a>
+            </div>
+            <div class="facet-check">
+              <label>{{localize "ROYALBLOOD.Lost"}}</label>
+              <a class="facet-toggle" data-facet="facet2" data-field="lost">
+                <i class="{{#if system.facet2.lost}}fas fa-check-circle{{else}}far fa-circle{{/if}}"></i>
+              </a>
+            </div>
+          </div>
+          <div class="field">
+            <label>{{localize "ROYALBLOOD.Description"}}</label>
+            <textarea name="system.facet2.description" rows="2">{{system.facet2.description}}</textarea>
+          </div>
+        </div>
+
+        <div class="facet-card">
+          <div class="facet-header"><span class="facet-title">{{localize "ROYALBLOOD.Facet"}}</span></div>
+          <div class="field">
+            <label>{{localize "ROYALBLOOD.Name"}}</label>
+            <input type="text" name="system.facet3.name" value="{{system.facet3.name}}"/>
+          </div>
+          <div class="facet-checks facet-checks-2col">
+            <div class="facet-check">
+              <label>{{localize "ROYALBLOOD.Lead"}}</label>
+              <a class="facet-toggle" data-facet="facet3" data-field="lead">
+                <i class="{{#if system.facet3.lead}}fas fa-check-circle{{else}}far fa-circle{{/if}}"></i>
+              </a>
+            </div>
+            <div class="facet-check">
+              <label>{{localize "ROYALBLOOD.Silver"}}</label>
+              <a class="facet-toggle" data-facet="facet3" data-field="silver">
+                <i class="{{#if system.facet3.silver}}fas fa-check-circle{{else}}far fa-circle{{/if}}"></i>
+              </a>
+            </div>
+          </div>
+          <div class="facet-checks facet-checks-2col">
+            <div class="facet-check">
+              <label>{{localize "ROYALBLOOD.Marked"}}</label>
+              <a class="facet-toggle" data-facet="facet3" data-field="marked">
+                <i class="{{#if system.facet3.marked}}fas fa-check-circle{{else}}far fa-circle{{/if}}"></i>
+              </a>
+            </div>
+            <div class="facet-check">
+              <label>{{localize "ROYALBLOOD.Lost"}}</label>
+              <a class="facet-toggle" data-facet="facet3" data-field="lost">
+                <i class="{{#if system.facet3.lost}}fas fa-check-circle{{else}}far fa-circle{{/if}}"></i>
+              </a>
+            </div>
+          </div>
+          <div class="field">
+            <label>{{localize "ROYALBLOOD.Description"}}</label>
+            <textarea name="system.facet3.description" rows="2">{{system.facet3.description}}</textarea>
+          </div>
+        </div>
+      </div>
+
+      {{!-- Royals Row: 2 columns --}}
+      <div class="royals-row">
+        <div class="royal-box">
+          <h2>{{localize "ROYALBLOOD.RoyalToYourLeft"}}</h2>
+          <div class="field">
+            <label>{{localize "ROYALBLOOD.Name"}}</label>
+            <input type="text" name="system.royalLeft.name" value="{{system.royalLeft.name}}"/>
+          </div>
+          <div class="field">
+            <label>{{localize "ROYALBLOOD.Question"}}</label>
+            <input type="text" name="system.royalLeft.question" value="{{system.royalLeft.question}}"/>
+          </div>
+          <div class="field">
+            <label>{{localize "ROYALBLOOD.TheirAnswer"}}</label>
+            <textarea name="system.royalLeft.answer" rows="2">{{system.royalLeft.answer}}</textarea>
+          </div>
+        </div>
+
+        <div class="royal-box">
+          <h2>{{localize "ROYALBLOOD.RoyalToYourRight"}}</h2>
+          <div class="field">
+            <label>{{localize "ROYALBLOOD.Name"}}</label>
+            <input type="text" name="system.royalRight.name" value="{{system.royalRight.name}}"/>
+          </div>
+          <div class="field">
+            <label>{{localize "ROYALBLOOD.Question"}}</label>
+            <input type="text" name="system.royalRight.question" value="{{system.royalRight.question}}"/>
+          </div>
+          <div class="field">
+            <label>{{localize "ROYALBLOOD.TheirAnswer"}}</label>
+            <textarea name="system.royalRight.answer" rows="2">{{system.royalRight.answer}}</textarea>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    {{!-- Back Tab --}}
+    <div class="tab back" data-group="primary" data-tab="back">
+      <div class="back-layout">
+
+        {{!-- Twists --}}
+        <div class="twists-section">
+          <div class="section-header">
+            <h2>{{localize "ROYALBLOOD.Twists"}}</h2>
+            <a class="item-create" data-type="twist" title="{{localize 'ROYALBLOOD.AddTwist'}}">
+              <i class="fas fa-plus"></i>
+            </a>
+          </div>
+          <table class="twist-table item-list">
+            <thead>
+              <tr>
+                <th>{{localize "ROYALBLOOD.Name"}}</th>
+                <th>{{localize "ROYALBLOOD.Effect"}}</th>
+                <th>{{localize "ROYALBLOOD.Used"}}</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#each twists as |twist|}}
+              <tr class="item" data-item-id="{{twist._id}}">
+                <td>
+                  <input type="text" class="item-inline-edit" data-field="name"
+                    value="{{twist.name}}" data-dtype="String"/>
+                </td>
+                <td>
+                  <input type="text" class="item-inline-edit" data-field="effect"
+                    value="{{twist.system.effect}}"/>
+                </td>
+                <td class="toggle-cell">
+                  <a class="item-toggle" data-field="used">
+                    <i class="{{#if twist.system.used}}fas fa-check-circle{{else}}far fa-circle{{/if}}"></i>
+                  </a>
+                </td>
+                <td class="item-controls">
+                  <a class="item-edit" title="{{localize 'ROYALBLOOD.Edit'}}"><i class="fas fa-edit"></i></a>
+                  <a class="item-delete" title="{{localize 'ROYALBLOOD.Delete'}}"><i class="fas fa-trash"></i></a>
+                </td>
+              </tr>
+              {{/each}}
+            </tbody>
+          </table>
+        </div>
+
+        {{!-- Value Reference --}}
+        <div class="value-section">
+          <h2>{{localize "ROYALBLOOD.Value"}}</h2>
+          <table class="value-table">
+            <thead>
+              <tr>
+                <th>{{localize "ROYALBLOOD.ValueHeader"}}</th>
+                <th>{{localize "ROYALBLOOD.Outcome"}}</th>
+                <th>{{localize "ROYALBLOOD.Instructions"}}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="value-rank">2–5</td>
+                <td class="value-effect">{{localize "ROYALBLOOD.ValueMakeWorse"}}</td>
+                <td class="value-instructions">{{localize "ROYALBLOOD.ValueMakeWorseDesc"}}</td>
+              </tr>
+              <tr>
+                <td class="value-rank">6–10</td>
+                <td class="value-effect">{{localize "ROYALBLOOD.ValueMakeProgress"}}</td>
+                <td class="value-instructions">{{localize "ROYALBLOOD.ValueMakeProgressDesc"}}</td>
+              </tr>
+              <tr>
+                <td class="value-rank">{{localize "ROYALBLOOD.Court"}}</td>
+                <td class="value-effect">{{localize "ROYALBLOOD.ValueSeizeAdvantage"}}</td>
+                <td class="value-instructions">{{localize "ROYALBLOOD.ValueSeizeAdvantageDesc"}}</td>
+              </tr>
+              <tr>
+                <td class="value-rank">{{localize "ROYALBLOOD.Ace"}}</td>
+                <td class="value-effect">{{localize "ROYALBLOOD.ValueTakeForOwn"}}</td>
+                <td class="value-instructions">{{localize "ROYALBLOOD.ValueTakeForOwnDesc"}}</td>
+              </tr>
+              <tr>
+                <td class="value-rank">{{localize "ROYALBLOOD.Joker"}}</td>
+                <td class="value-effect">{{localize "ROYALBLOOD.ValueMakeInteresting"}}</td>
+                <td class="value-instructions">{{localize "ROYALBLOOD.ValueMakeInterestingDesc"}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        {{!-- Secrets & Notes --}}
+        <div class="notes-section">
+          <div class="notes-column">
+            <h2>{{localize "ROYALBLOOD.Secrets"}}</h2>
+            <textarea name="system.secrets" rows="5">{{system.secrets}}</textarea>
+          </div>
+          <div class="notes-column">
+            <h2>{{localize "ROYALBLOOD.Notes"}}</h2>
+            <textarea name="system.notes" rows="5">{{system.notes}}</textarea>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </section>
+</form>
