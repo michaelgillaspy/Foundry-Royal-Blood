@@ -1,6 +1,5 @@
 {
   "id": "royal-blood",
-  "type": "system",
   "title": "Royal Blood",
   "description": "An unofficial Foundry VTT system for Royal Blood, the tarot heist RPG by Rowan, Rook & Decard and Mana Project Studio.",
   "version": "0.1.2",
