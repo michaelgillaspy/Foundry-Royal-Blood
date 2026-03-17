@@ -182,31 +182,36 @@ export const MAJOR_ARCANA = [
   }
 ];
 
-const CUSTOM_DATA_PATH = "systems/royal-blood/cards/major-arcana-data.json";
+const USER_DATA = "royal-blood-files";
+const CUSTOM_DATA_FOLDERS = [
+  { folder: `${USER_DATA}/cards`, path: `${USER_DATA}/cards/major-arcana-data.json` },
+  { folder: "systems/royal-blood/cards", path: "systems/royal-blood/cards/major-arcana-data.json" }
+];
 
 let _mergedData = null;
 
 /**
  * Load custom arcana data from JSON if it exists, merged with built-in defaults.
  * Custom entries override built-in ones by name (fuzzy match).
+ * Checks user data folder first, then system folder.
  */
 export async function loadArcanaData() {
   if (_mergedData) return _mergedData;
 
   let customData = [];
-  try {
-    // Check if file exists before fetching to avoid 404 console noise
-    const check = await foundry.applications.apps.FilePicker.implementation.browse("data", "systems/royal-blood/cards", { extensions: [".json"] });
-    const hasCustom = check.files?.some(f => f.endsWith("major-arcana-data.json"));
-    if (hasCustom) {
-      const response = await fetch(CUSTOM_DATA_PATH);
-      if (response.ok) {
-        customData = await response.json();
-        console.log(`Royal Blood | Loaded custom arcana data (${customData.length} entries).`);
+  for (const { folder, path } of CUSTOM_DATA_FOLDERS) {
+    try {
+      const check = await foundry.applications.apps.FilePicker.implementation.browse("data", folder, { extensions: [".json"] });
+      const hasCustom = check.files?.some(f => f.endsWith("major-arcana-data.json"));
+      if (hasCustom) {
+        const response = await fetch(path);
+        if (response.ok) {
+          customData = await response.json();
+          console.log(`Royal Blood | Loaded custom arcana data (${customData.length} entries).`);
+          break;
+        }
       }
-    }
-  } catch {
-    // No custom file or folder not browsable — use defaults only
+    } catch { /* try next folder */ }
   }
 
   // Start with built-in data, override with custom entries by name match

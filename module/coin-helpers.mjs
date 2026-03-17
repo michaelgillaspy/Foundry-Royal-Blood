@@ -4,19 +4,21 @@
  */
 
 const COIN_SIZE = 100;
-const COIN_FOLDER = "systems/royal-blood/tokens/coin";
+const USER_DATA = "royal-blood-files";
+const COIN_FOLDER_USER = `${USER_DATA}/tokens/coin`;
+const COIN_FOLDER_SYSTEM = "systems/royal-blood/tokens/coin";
 
 /**
  * Scan the coin folder and return the first image found.
+ * Checks user data folder first, then system folder.
  */
 async function _getCoinImg() {
-  try {
-    const result = await foundry.applications.apps.FilePicker.implementation.browse("data", COIN_FOLDER, {
-      extensions: [".png", ".jpg", ".jpeg", ".webp", ".svg", ".gif"]
-    });
-    if (result.files.length > 0) return result.files[0];
-  } catch (e) {
-    console.warn("Royal Blood | Could not browse coin folder:", e);
+  const exts = { extensions: [".png", ".jpg", ".jpeg", ".webp", ".svg", ".gif"] };
+  for (const folder of [COIN_FOLDER_USER, COIN_FOLDER_SYSTEM]) {
+    try {
+      const result = await foundry.applications.apps.FilePicker.implementation.browse("data", folder, exts);
+      if (result.files.length > 0) return result.files[0];
+    } catch { /* try next folder */ }
   }
   return "";
 }

@@ -1,10 +1,20 @@
 # Royal Blood — Foundry VTT System
 
-An unofficial Foundry VTT system for **Royal Blood**, the tarot heist RPG by Mana Project Studio and Rowan, Rook & Decard. Requires **Foundry VTT v12**.
+An unofficial Foundry VTT system for **Royal Blood**, the tarot heist RPG by Mana Project Studio and Rowan, Rook & Decard. Requires **Foundry VTT v13**.
 
 > **Note:** This system does not include card artwork. You must supply your own tarot card images — any standard Tarot deck will work.
 
 ## Installation
+
+### From Manifest URL
+
+1. In Foundry, go to **Add-on Packages → Install System**
+2. Paste the manifest URL: `https://github.com/michaelgillaspy/foundry-royal-blood/releases/latest/download/system.json`
+3. Click **Install**
+4. Add your card images (see **Setting Up Card Images** below)
+5. Create a new world using the **Royal Blood** system
+
+### Manual
 
 1. Download or clone this repository into your Foundry VTT `Data/systems/` folder so the path is `Data/systems/royal-blood/`
 2. Add your card images (see **Setting Up Card Images** below)
@@ -12,10 +22,10 @@ An unofficial Foundry VTT system for **Royal Blood**, the tarot heist RPG by Man
 
 ## Setting Up Card Images
 
-The system scans image folders to build decks and actors dynamically. Place your card images in the following folders inside the system directory:
+The system scans image folders to build decks and actors dynamically. Place your card images in the **user data folder** so they survive system updates:
 
 ```
-systems/royal-blood/
+Data/royal-blood-files/
   cards/
     major/          ← Major Arcana (22 cards)
     minor/          ← Minor Arcana pip cards (Ace–10 per suit + Jokers)
@@ -24,6 +34,8 @@ systems/royal-blood/
   tokens/
     coin/           ← Coin token image (1 image)
 ```
+
+> **Tip:** Images placed in `Data/royal-blood-files/` persist across system updates. The system also checks `Data/systems/royal-blood/cards/` as a fallback, but those files will be overwritten when the system updates.
 
 **Naming:** Card names are derived from filenames (minus extension). For Major Arcana, prefix with the card number for sort order:
 
@@ -141,7 +153,7 @@ New scenes are automatically configured with:
 To override the built-in Major Arcana descriptions, create a JSON file at:
 
 ```
-systems/royal-blood/cards/major-arcana-data.json
+Data/royal-blood-files/cards/major-arcana-data.json
 ```
 
 Format:

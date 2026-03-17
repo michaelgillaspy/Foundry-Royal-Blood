@@ -11,8 +11,10 @@ const CARD_TILE_WIDTH = 420;
 const CARD_TILE_HEIGHT = 720;
 const NOTE_WIDTH = 420;
 const NOTE_SPACING = 20;
-const NOTES_FOLDER = "royal-blood-notes";
-const BACKS_FOLDER = "systems/royal-blood/cards/backs";
+const USER_DATA = "royal-blood-files";
+const NOTES_FOLDER = `${USER_DATA}/notes`;
+const BACKS_FOLDER_USER = `${USER_DATA}/cards/backs`;
+const BACKS_FOLDER_SYSTEM = "systems/royal-blood/cards/backs";
 
 // ─── Themes ─────────────────────────────────────────────────────
 
@@ -64,19 +66,19 @@ function _getTheme() {
  * Get the first card back image from the backs folder.
  */
 async function _getCardBackImg() {
-  try {
-    const result = await foundry.applications.apps.FilePicker.implementation.browse(
-      "data", BACKS_FOLDER, { extensions: [".png", ".jpg", ".jpeg", ".webp", ".svg", ".gif"] }
-    );
-    return result.files.length > 0 ? result.files[0] : "";
-  } catch {
-    return "";
+  const exts = { extensions: [".png", ".jpg", ".jpeg", ".webp", ".svg", ".gif"] };
+  for (const folder of [BACKS_FOLDER_USER, BACKS_FOLDER_SYSTEM]) {
+    try {
+      const result = await foundry.applications.apps.FilePicker.implementation.browse("data", folder, exts);
+      if (result.files.length > 0) return result.files[0];
+    } catch { /* folder doesn't exist, try next */ }
   }
+  return "";
 }
 
 // ─── Scene Background Renderer ───────────────────────────────────
 
-const BG_FOLDER = "royal-blood-backgrounds";
+const BG_FOLDER = `${USER_DATA}/backgrounds`;
 
 async function _ensureBgFolder() {
   try {
@@ -493,19 +495,22 @@ function _viewportCenter() {
  * Skips actors that already exist. All get OBSERVER permission for players.
  */
 export async function createArcanaActors() {
-  const MAJOR_FOLDER = "systems/royal-blood/cards/major";
+  const MAJOR_FOLDERS = [`${USER_DATA}/cards/major`, "systems/royal-blood/cards/major"];
+  const exts = { extensions: [".png", ".jpg", ".jpeg", ".webp", ".svg", ".gif"] };
   let images;
-  try {
-    const result = await foundry.applications.apps.FilePicker.implementation.browse(
-      "data", MAJOR_FOLDER, { extensions: [".png", ".jpg", ".jpeg", ".webp", ".svg", ".gif"] }
-    );
-    images = result.files.map(path => {
-      const filename = decodeURIComponent(path.split("/").pop());
-      const name = filename.replace(/\.[^.]+$/, "");
-      return { name, path };
-    });
-  } catch (e) {
-    console.warn("Royal Blood | Could not browse major arcana folder:", e);
+  for (const folder of MAJOR_FOLDERS) {
+    try {
+      const result = await foundry.applications.apps.FilePicker.implementation.browse("data", folder, exts);
+      const found = result.files.map(path => {
+        const filename = decodeURIComponent(path.split("/").pop());
+        const name = filename.replace(/\.[^.]+$/, "");
+        return { name, path };
+      });
+      if (found.length > 0) { images = found; break; }
+    } catch { /* try next folder */ }
+  }
+  if (!images) {
+    console.warn("Royal Blood | Could not find major arcana images in any folder.");
     return;
   }
 

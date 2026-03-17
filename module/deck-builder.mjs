@@ -4,7 +4,15 @@
  * Card names are derived from filenames (minus extension).
  */
 
-const CARD_FOLDERS = {
+// User data paths (survive system updates) and system fallback paths
+const USER_DATA = "royal-blood-files";
+const USER_CARD_FOLDERS = {
+  major: `${USER_DATA}/cards/major`,
+  minor: `${USER_DATA}/cards/minor`,
+  court: `${USER_DATA}/cards/court`,
+  backs: `${USER_DATA}/cards/backs`
+};
+const SYSTEM_CARD_FOLDERS = {
   major: "systems/royal-blood/cards/major",
   minor: "systems/royal-blood/cards/minor",
   court: "systems/royal-blood/cards/court",
@@ -26,16 +34,25 @@ async function _listImages(folder) {
       })
       .sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true }));
   } catch (e) {
-    console.warn(`Royal Blood | Could not browse folder: ${folder}`, e);
+    // Silently fail — folder may not exist
     return [];
   }
+}
+
+/**
+ * List images, checking user data folder first then system folder.
+ */
+async function _listImagesWithFallback(key) {
+  const userImages = await _listImages(USER_CARD_FOLDERS[key]);
+  if (userImages.length > 0) return userImages;
+  return _listImages(SYSTEM_CARD_FOLDERS[key]);
 }
 
 /**
  * Get the first card back image from the backs folder.
  */
 async function _getBackImage() {
-  const backs = await _listImages(CARD_FOLDERS.backs);
+  const backs = await _listImagesWithFallback("backs");
   return backs.length > 0 ? backs[0].path : "";
 }
 
@@ -86,7 +103,7 @@ export async function setupDecks() {
   const backImg = await _getBackImage();
 
   // Major Arcana
-  const majorImages = await _listImages(CARD_FOLDERS.major);
+  const majorImages = await _listImagesWithFallback("major");
   if (majorImages.length > 0) {
     await _createDeckIfMissing(
       "Major Arcana", "deck",
@@ -99,7 +116,7 @@ export async function setupDecks() {
   }
 
   // Minor Arcana (pip cards)
-  const minorImages = await _listImages(CARD_FOLDERS.minor);
+  const minorImages = await _listImagesWithFallback("minor");
   if (minorImages.length > 0) {
     await _createDeckIfMissing(
       "Minor Arcana", "deck",
@@ -112,7 +129,7 @@ export async function setupDecks() {
   }
 
   // Court Cards
-  const courtImages = await _listImages(CARD_FOLDERS.court);
+  const courtImages = await _listImagesWithFallback("court");
   if (courtImages.length > 0) {
     await _createDeckIfMissing(
       "Court Cards", "deck",
