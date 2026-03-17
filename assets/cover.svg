@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Signika:wght@600;700&amp;display=swap');
+      text { font-family: 'Signika', 'Georgia', serif; }
+    </style>
+    <radialGradient id="bg" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#2a1a3a"/>
+      <stop offset="100%" stop-color="#120a1e"/>
+    </radialGradient>
+    <radialGradient id="glow" cx="50%" cy="45%" r="35%">
+      <stop offset="0%" stop-color="#d0c0e0" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#c0c0c0" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1920" height="1080" fill="url(#bg)"/>
+  <rect width="1920" height="1080" fill="url(#glow)"/>
+
+  <!-- Outer border -->
+  <rect x="20" y="20" width="1880" height="1040" fill="none" stroke="#c0c0c0" stroke-width="3"/>
+
+  <!-- Inner border -->
+  <rect x="36" y="36" width="1848" height="1008" fill="none" stroke="#c0c0c0" stroke-width="1.5" stroke-opacity="0.6"/>
+
+  <!-- Corner ornaments (diamonds) -->
+  <g fill="#c0c0c0" opacity="0.8">
+    <!-- Top-left -->
+    <polygon points="36,20 52,36 36,52 20,36"/>
+    <!-- Top-right -->
+    <polygon points="1884,20 1900,36 1884,52 1868,36"/>
+    <!-- Bottom-left -->
+    <polygon points="36,1028 52,1044 36,1060 20,1044"/>
+    <!-- Bottom-right -->
+    <polygon points="1884,1028 1900,1044 1884,1060 1868,1044"/>
+  </g>
+
+  <!-- Decorative horizontal lines -->
+  <line x1="200" y1="380" x2="860" y2="380" stroke="#c0c0c0" stroke-width="1" opacity="0.4"/>
+  <line x1="1060" y1="380" x2="1720" y2="380" stroke="#c0c0c0" stroke-width="1" opacity="0.4"/>
+  <line x1="200" y1="700" x2="860" y2="700" stroke="#c0c0c0" stroke-width="1" opacity="0.4"/>
+  <line x1="1060" y1="700" x2="1720" y2="700" stroke="#c0c0c0" stroke-width="1" opacity="0.4"/>
+
+  <!-- Central diamond ornament - top -->
+  <polygon points="960,360 980,380 960,400 940,380" fill="#c0c0c0" opacity="0.6"/>
+  <!-- Central diamond ornament - bottom -->
+  <polygon points="960,680 980,700 960,720 940,700" fill="#c0c0c0" opacity="0.6"/>
+
+  <!-- Tarot star (8-pointed) -->
+  <g transform="translate(960,540)" fill="none" stroke="#c0c0c0" stroke-width="1.5" opacity="0.15">
+    <polygon points="0,-120 14,-14 120,0 14,14 0,120 -14,14 -120,0 -14,-14"/>
+    <polygon points="0,-120 14,-14 120,0 14,14 0,120 -14,14 -120,0 -14,-14" transform="rotate(45)"/>
+    <circle cx="0" cy="0" r="80"/>
+    <circle cx="0" cy="0" r="40"/>
+  </g>
+
+  <!-- Suit symbols (faint, decorative) -->
+  <!-- Wands (top-left) -->
+  <g transform="translate(300,540)" fill="#c0c0c0" opacity="0.08">
+    <rect x="-4" y="-60" width="8" height="120" rx="3"/>
+    <circle cx="0" cy="-65" r="10"/>
+  </g>
+  <!-- Cups (top-right) -->
+  <g transform="translate(1620,540)" fill="#c0c0c0" opacity="0.08">
+    <path d="M-20,10 L-15,-30 L15,-30 L20,10 Q0,35 -20,10 Z"/>
+    <rect x="-5" y="10" width="10" height="20"/>
+    <rect x="-15" y="30" width="30" height="5" rx="2"/>
+  </g>
+  <!-- Swords (left) -->
+  <g transform="translate(160,540)" fill="#c0c0c0" opacity="0.08">
+    <rect x="-3" y="-60" width="6" height="95"/>
+    <rect x="-18" y="20" width="36" height="8" rx="2"/>
+    <polygon points="0,-65 -8,-55 8,-55"/>
+  </g>
+  <!-- Pentacles (right) -->
+  <g transform="translate(1760,540)" fill="none" stroke="#c0c0c0" stroke-width="3" opacity="0.08">
+    <circle cx="0" cy="0" r="30"/>
+    <polygon points="0,-28 7,-9 28,-9 11,4 17,25 0,13 -17,25 -11,4 -28,-9 -7,-9"/>
+  </g>
+
+  <!-- Title -->
+  <text x="960" y="510" text-anchor="middle" fill="#c0c0c0" font-size="96" font-weight="700" letter-spacing="12" font-variant="small-caps">Royal Blood</text>
+
+  <!-- Subtitle -->
+  <text x="960" y="580" text-anchor="middle" fill="#c0c0c0" font-size="28" letter-spacing="8" opacity="0.5" font-variant="small-caps">A Tarot Heist Roleplaying Game</text>
+
+  <!-- System credit -->
+  <text x="960" y="640" text-anchor="middle" fill="#c0c0c0" font-size="18" letter-spacing="4" opacity="0.3">Foundry VTT System</text>
+
+  <!-- Small decorative dots along the lines -->
+  <circle cx="200" cy="380" r="2" fill="#c0c0c0" opacity="0.4"/>
+  <circle cx="1720" cy="380" r="2" fill="#c0c0c0" opacity="0.4"/>
+  <circle cx="200" cy="700" r="2" fill="#c0c0c0" opacity="0.4"/>
+  <circle cx="1720" cy="700" r="2" fill="#c0c0c0" opacity="0.4"/>
+</svg>
