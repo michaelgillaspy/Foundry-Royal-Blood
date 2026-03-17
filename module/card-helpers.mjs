@@ -16,6 +16,37 @@ const NOTES_FOLDER = `${USER_DATA}/notes`;
 const BACKS_FOLDER_USER = `${USER_DATA}/cards/backs`;
 const BACKS_FOLDER_SYSTEM = "systems/royal-blood/cards/backs";
 
+// ─── User Data Folder Setup ─────────────────────────────────────
+
+const USER_DATA_FOLDERS = [
+  USER_DATA,
+  `${USER_DATA}/cards`,
+  `${USER_DATA}/cards/major`,
+  `${USER_DATA}/cards/minor`,
+  `${USER_DATA}/cards/court`,
+  `${USER_DATA}/cards/backs`,
+  `${USER_DATA}/tokens`,
+  `${USER_DATA}/tokens/coin`,
+  `${USER_DATA}/notes`,
+  `${USER_DATA}/backgrounds`
+];
+
+/**
+ * Create the full royal-blood-files folder tree if it doesn't exist.
+ */
+export async function ensureUserDataFolders() {
+  const fp = foundry.applications.apps.FilePicker.implementation;
+  for (const folder of USER_DATA_FOLDERS) {
+    try {
+      await fp.browse("data", folder);
+    } catch {
+      try {
+        await fp.createDirectory("data", folder);
+      } catch { /* already exists or parent missing — skip */ }
+    }
+  }
+}
+
 // ─── Themes ─────────────────────────────────────────────────────
 
 const THEMES = {

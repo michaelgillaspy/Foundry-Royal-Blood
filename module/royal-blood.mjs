@@ -1,7 +1,7 @@
 import { RoyalCharacterSheet } from "./sheets/RoyalCharacterSheet.mjs";
 import { RoyalTwistSheet } from "./sheets/RoyalTwistSheet.mjs";
 import { RoyalArcanaSheet } from "./sheets/RoyalArcanaSheet.mjs";
-import { registerCardHelpers, createCardMacros, registerCardTileHook, createArcanaActors } from "./card-helpers.mjs";
+import { registerCardHelpers, createCardMacros, registerCardTileHook, createArcanaActors, ensureUserDataFolders } from "./card-helpers.mjs";
 import { setupDecks, rebuildDecks } from "./deck-builder.mjs";
 import { registerCoinHelpers, registerCoinSocket, createCoinMacros } from "./coin-helpers.mjs";
 import { loadArcanaData } from "./major-arcana-data.mjs";
@@ -91,6 +91,9 @@ Hooks.on("renderTokenHUD", (hud, html) => {
 });
 
 Hooks.once("ready", async () => {
+  // Create user data folder structure
+  if (game.user.isGM) await ensureUserDataFolders();
+
   // Load custom arcana data (if any) before creating actors
   await loadArcanaData();
 
