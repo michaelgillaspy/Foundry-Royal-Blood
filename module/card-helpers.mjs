@@ -1390,6 +1390,7 @@ export async function chooseCharacters() {
       name: card.name,
       type: "character",
       img: img || "icons/svg/mystery-man.svg",
+      system: { courtCardImg: img || "" },
       ownership: {
         default: CONST.DOCUMENT_OWNERSHIP_LEVELS.NONE,
         [playerId]: CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER

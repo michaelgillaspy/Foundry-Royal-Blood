@@ -1,4 +1,9 @@
 <header class="sheet-header">
+  {{#if system.courtCardImg}}
+  <div class="court-card-portrait">
+    <img src="{{system.courtCardImg}}" alt="Court Card" />
+  </div>
+  {{/if}}
   <div class="header-fields">
     <div class="field">
       <label>{{localize "ROYALBLOOD.Rank"}}</label>

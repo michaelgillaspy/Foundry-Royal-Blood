@@ -39,6 +39,7 @@
         "description": ""
       },
       "coins": 0,
+      "courtCardImg": "",
       "secrets": "",
       "notes": ""
     },

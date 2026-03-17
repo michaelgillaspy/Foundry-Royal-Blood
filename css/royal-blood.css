@@ -147,6 +147,20 @@ body.royal-blood-light .royal-blood.sheet textarea::placeholder {
   border-bottom: 2px solid var(--rb-border);
   width: 100%;
   box-sizing: border-box;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.royal-blood .court-card-portrait {
+  flex: 0 0 auto;
+}
+
+.royal-blood .court-card-portrait img {
+  width: 100px;
+  height: auto;
+  border: 2px solid var(--rb-border);
+  border-radius: 4px;
 }
 
 .royal-blood .header-fields {
@@ -154,7 +168,8 @@ body.royal-blood-light .royal-blood.sheet textarea::placeholder {
   grid-template-columns: 1fr 1fr 80px;
   grid-template-rows: auto auto;
   gap: 6px 16px;
-  width: 100%;
+  flex: 1;
+  min-width: 0;
 }
 
 .royal-blood .header-fields .field:nth-child(1) {
