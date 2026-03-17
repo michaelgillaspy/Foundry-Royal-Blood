@@ -19,78 +19,74 @@
   <rect width="1920" height="1080" fill="url(#glow)"/>
 
   <!-- Outer border -->
-  <rect x="20" y="20" width="1880" height="1040" fill="none" stroke="#c0c0c0" stroke-width="3"/>
+  <rect x="20" y="20" width="1880" height="1040" fill="none" stroke="#c0c0c0" stroke-width="4"/>
 
   <!-- Inner border -->
-  <rect x="36" y="36" width="1848" height="1008" fill="none" stroke="#c0c0c0" stroke-width="1.5" stroke-opacity="0.6"/>
+  <rect x="40" y="40" width="1840" height="1000" fill="none" stroke="#c0c0c0" stroke-width="2" stroke-opacity="0.6"/>
 
-  <!-- Corner ornaments (diamonds) -->
+  <!-- Corner ornaments (diamonds) - larger -->
   <g fill="#c0c0c0" opacity="0.8">
-    <!-- Top-left -->
-    <polygon points="36,20 52,36 36,52 20,36"/>
-    <!-- Top-right -->
-    <polygon points="1884,20 1900,36 1884,52 1868,36"/>
-    <!-- Bottom-left -->
-    <polygon points="36,1028 52,1044 36,1060 20,1044"/>
-    <!-- Bottom-right -->
-    <polygon points="1884,1028 1900,1044 1884,1060 1868,1044"/>
+    <polygon points="40,12 60,40 40,68 20,40"/>
+    <polygon points="1880,12 1900,40 1880,68 1860,40"/>
+    <polygon points="40,1012 60,1040 40,1068 20,1040"/>
+    <polygon points="1880,1012 1900,1040 1880,1068 1860,1040"/>
   </g>
 
   <!-- Decorative horizontal lines -->
-  <line x1="200" y1="380" x2="860" y2="380" stroke="#c0c0c0" stroke-width="1" opacity="0.4"/>
-  <line x1="1060" y1="380" x2="1720" y2="380" stroke="#c0c0c0" stroke-width="1" opacity="0.4"/>
-  <line x1="200" y1="700" x2="860" y2="700" stroke="#c0c0c0" stroke-width="1" opacity="0.4"/>
-  <line x1="1060" y1="700" x2="1720" y2="700" stroke="#c0c0c0" stroke-width="1" opacity="0.4"/>
+  <line x1="200" y1="380" x2="860" y2="380" stroke="#c0c0c0" stroke-width="1.5" opacity="0.4"/>
+  <line x1="1060" y1="380" x2="1720" y2="380" stroke="#c0c0c0" stroke-width="1.5" opacity="0.4"/>
+  <line x1="200" y1="700" x2="860" y2="700" stroke="#c0c0c0" stroke-width="1.5" opacity="0.4"/>
+  <line x1="1060" y1="700" x2="1720" y2="700" stroke="#c0c0c0" stroke-width="1.5" opacity="0.4"/>
 
   <!-- Central diamond ornament - top -->
-  <polygon points="960,360 980,380 960,400 940,380" fill="#c0c0c0" opacity="0.6"/>
+  <polygon points="960,356 984,380 960,404 936,380" fill="#c0c0c0" opacity="0.6"/>
   <!-- Central diamond ornament - bottom -->
-  <polygon points="960,680 980,700 960,720 940,700" fill="#c0c0c0" opacity="0.6"/>
+  <polygon points="960,676 984,700 960,724 936,700" fill="#c0c0c0" opacity="0.6"/>
 
-  <!-- Tarot star (8-pointed) -->
-  <g transform="translate(960,540)" fill="none" stroke="#c0c0c0" stroke-width="1.5" opacity="0.15">
-    <polygon points="0,-120 14,-14 120,0 14,14 0,120 -14,14 -120,0 -14,-14"/>
-    <polygon points="0,-120 14,-14 120,0 14,14 0,120 -14,14 -120,0 -14,-14" transform="rotate(45)"/>
-    <circle cx="0" cy="0" r="80"/>
-    <circle cx="0" cy="0" r="40"/>
+  <!-- Tarot star (8-pointed) - larger -->
+  <g transform="translate(960,540)" fill="none" stroke="#c0c0c0" stroke-width="2" opacity="0.18">
+    <polygon points="0,-180 21,-21 180,0 21,21 0,180 -21,21 -180,0 -21,-21"/>
+    <polygon points="0,-180 21,-21 180,0 21,21 0,180 -21,21 -180,0 -21,-21" transform="rotate(45)"/>
+    <circle cx="0" cy="0" r="120"/>
+    <circle cx="0" cy="0" r="60"/>
   </g>
 
-  <!-- Suit symbols (faint, decorative) -->
-  <!-- Wands (top-left) -->
-  <g transform="translate(300,540)" fill="#c0c0c0" opacity="0.08">
-    <rect x="-4" y="-60" width="8" height="120" rx="3"/>
-    <circle cx="0" cy="-65" r="10"/>
+  <!-- Suit symbols - larger -->
+  <!-- Wands (left-center) -->
+  <g transform="translate(300,540)" fill="#c0c0c0" opacity="0.12">
+    <rect x="-6" y="-90" width="12" height="180" rx="4"/>
+    <circle cx="0" cy="-97" r="14"/>
   </g>
-  <!-- Cups (top-right) -->
-  <g transform="translate(1620,540)" fill="#c0c0c0" opacity="0.08">
-    <path d="M-20,10 L-15,-30 L15,-30 L20,10 Q0,35 -20,10 Z"/>
-    <rect x="-5" y="10" width="10" height="20"/>
-    <rect x="-15" y="30" width="30" height="5" rx="2"/>
+  <!-- Cups (right-center) -->
+  <g transform="translate(1620,540)" fill="#c0c0c0" opacity="0.12">
+    <path d="M-30,15 L-22,-45 L22,-45 L30,15 Q0,52 -30,15 Z"/>
+    <rect x="-7" y="15" width="14" height="28"/>
+    <rect x="-22" y="43" width="44" height="7" rx="3"/>
   </g>
-  <!-- Swords (left) -->
-  <g transform="translate(160,540)" fill="#c0c0c0" opacity="0.08">
-    <rect x="-3" y="-60" width="6" height="95"/>
-    <rect x="-18" y="20" width="36" height="8" rx="2"/>
-    <polygon points="0,-65 -8,-55 8,-55"/>
+  <!-- Swords (far left) -->
+  <g transform="translate(160,540)" fill="#c0c0c0" opacity="0.12">
+    <rect x="-4" y="-90" width="8" height="140"/>
+    <rect x="-26" y="28" width="52" height="12" rx="3"/>
+    <polygon points="0,-97 -12,-82 12,-82"/>
   </g>
-  <!-- Pentacles (right) -->
-  <g transform="translate(1760,540)" fill="none" stroke="#c0c0c0" stroke-width="3" opacity="0.08">
-    <circle cx="0" cy="0" r="30"/>
-    <polygon points="0,-28 7,-9 28,-9 11,4 17,25 0,13 -17,25 -11,4 -28,-9 -7,-9"/>
+  <!-- Pentacles (far right) -->
+  <g transform="translate(1760,540)" fill="none" stroke="#c0c0c0" stroke-width="4" opacity="0.12">
+    <circle cx="0" cy="0" r="44"/>
+    <polygon points="0,-40 10,-13 40,-13 16,6 24,36 0,18 -24,36 -16,6 -40,-13 -10,-13"/>
   </g>
 
   <!-- Title -->
-  <text x="960" y="510" text-anchor="middle" fill="#c0c0c0" font-size="96" font-weight="700" letter-spacing="12" font-variant="small-caps">Royal Blood</text>
+  <text x="960" y="500" text-anchor="middle" fill="#c0c0c0" font-size="120" font-weight="700" letter-spacing="14" font-variant="small-caps">Royal Blood</text>
 
   <!-- Subtitle -->
-  <text x="960" y="580" text-anchor="middle" fill="#c0c0c0" font-size="28" letter-spacing="8" opacity="0.5" font-variant="small-caps">A Tarot Heist Roleplaying Game</text>
+  <text x="960" y="575" text-anchor="middle" fill="#c0c0c0" font-size="36" letter-spacing="10" opacity="0.5" font-variant="small-caps">A Tarot Heist Roleplaying Game</text>
 
   <!-- System credit -->
-  <text x="960" y="640" text-anchor="middle" fill="#c0c0c0" font-size="18" letter-spacing="4" opacity="0.3">Foundry VTT System</text>
+  <text x="960" y="640" text-anchor="middle" fill="#c0c0c0" font-size="22" letter-spacing="5" opacity="0.3">Unofficial Foundry VTT System</text>
 
   <!-- Small decorative dots along the lines -->
-  <circle cx="200" cy="380" r="2" fill="#c0c0c0" opacity="0.4"/>
-  <circle cx="1720" cy="380" r="2" fill="#c0c0c0" opacity="0.4"/>
-  <circle cx="200" cy="700" r="2" fill="#c0c0c0" opacity="0.4"/>
-  <circle cx="1720" cy="700" r="2" fill="#c0c0c0" opacity="0.4"/>
+  <circle cx="200" cy="380" r="3" fill="#c0c0c0" opacity="0.4"/>
+  <circle cx="1720" cy="380" r="3" fill="#c0c0c0" opacity="0.4"/>
+  <circle cx="200" cy="700" r="3" fill="#c0c0c0" opacity="0.4"/>
+  <circle cx="1720" cy="700" r="3" fill="#c0c0c0" opacity="0.4"/>
 </svg>
