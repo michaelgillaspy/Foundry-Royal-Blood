@@ -6,7 +6,7 @@ export class RoyalCharacterSheet extends HandlebarsApplicationMixin(ActorSheetV2
     classes: ["royal-blood", "sheet", "actor", "character"],
     position: {
       width: 800,
-      height: 900
+      height: 920
     },
     window: {
       resizable: true

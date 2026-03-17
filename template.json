@@ -40,6 +40,7 @@
       },
       "coins": 0,
       "courtCardImg": "",
+      "playerName": "",
       "secrets": "",
       "notes": ""
     },

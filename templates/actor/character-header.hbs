@@ -6,18 +6,22 @@
   {{/if}}
   <div class="header-fields">
     <div class="field">
+      <label>{{localize "ROYALBLOOD.Player"}}</label>
+      <input type="text" name="system.playerName" value="{{system.playerName}}" placeholder="{{localize 'ROYALBLOOD.Player'}}"/>
+    </div>
+    <div class="field">
       <label>{{localize "ROYALBLOOD.Rank"}}</label>
-      <input type="text" name="system.rank" value="{{system.rank}}" placeholder="{{localize 'ROYALBLOOD.Rank'}}"/>
+      <input type="text" name="system.rank" value="{{system.rank}}" placeholder="{{localize 'ROYALBLOOD.Rank'}}" {{#if system.courtCardImg}}disabled{{/if}}/>
     </div>
-    <div class="field">
-      <label>{{localize "ROYALBLOOD.Names"}}</label>
-      <input type="text" name="name" value="{{actor.name}}" placeholder="{{localize 'ROYALBLOOD.Names'}}"/>
-    </div>
-    <div class="field">
+    <div class="field header-coins">
       <label>{{localize "ROYALBLOOD.Coins"}}</label>
       <input type="number" value="{{system.coins}}" disabled/>
     </div>
-    <div class="field">
+    <div class="field header-name">
+      <label>{{localize "ROYALBLOOD.Names"}}</label>
+      <input type="text" name="name" value="{{actor.name}}" placeholder="{{localize 'ROYALBLOOD.Names'}}"/>
+    </div>
+    <div class="field header-desc">
       <label>{{localize "ROYALBLOOD.Description"}}</label>
       <textarea name="system.description" rows="2" placeholder="{{localize 'ROYALBLOOD.Description'}}">{{system.description}}</textarea>
     </div>

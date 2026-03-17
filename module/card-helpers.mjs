@@ -1387,10 +1387,10 @@ export async function chooseCharacters() {
 
     const img = _cardImg(card);
     const actor = await Actor.create({
-      name: card.name,
+      name: `${player.name}'s Royal`,
       type: "character",
       img: img || "icons/svg/mystery-man.svg",
-      system: { courtCardImg: img || "" },
+      system: { courtCardImg: img || "", playerName: player.name, rank: card.name },
       ownership: {
         default: CONST.DOCUMENT_OWNERSHIP_LEVELS.NONE,
         [playerId]: CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER
