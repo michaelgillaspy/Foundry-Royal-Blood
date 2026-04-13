@@ -613,10 +613,91 @@ export async function createArcanaActors() {
 }
 
 /**
- * Find the arcana actor matching a drawn card (by name).
+ * Create arcana actors for all Minor Arcana cards (from card images).
+ */
+export async function createMinorArcanaActors() {
+  const MINOR_FOLDERS = [`${USER_DATA}/cards/minor`, "systems/royal-blood/cards/minor"];
+  const COURT_FOLDERS = [`${USER_DATA}/cards/court`, "systems/royal-blood/cards/court"];
+  const exts = { extensions: [".png", ".jpg", ".jpeg", ".webp", ".svg", ".gif"] };
+
+  let images = [];
+  for (const folder of MINOR_FOLDERS) {
+    try {
+      const result = await foundry.applications.apps.FilePicker.implementation.browse("data", folder, exts);
+      const found = result.files.map(path => {
+        const filename = decodeURIComponent(path.split("/").pop());
+        const name = filename.replace(/\.[^.]+$/, ""); // match deck builder naming
+        return { name, path };
+      });
+      if (found.length > 0) { images = found; break; }
+    } catch { /* try next folder */ }
+  }
+
+  // Also include court cards (unchosen ones get merged into the minor deck)
+  for (const folder of COURT_FOLDERS) {
+    try {
+      const result = await foundry.applications.apps.FilePicker.implementation.browse("data", folder, exts);
+      const found = result.files.map(path => {
+        const filename = decodeURIComponent(path.split("/").pop());
+        const name = filename.replace(/\.[^.]+$/, "");
+        return { name, path };
+      });
+      if (found.length > 0) { images = images.concat(found); break; }
+    } catch { /* try next folder */ }
+  }
+
+  if (images.length === 0) {
+    console.warn("Royal Blood | Could not find minor arcana images in any folder.");
+    return;
+  }
+
+  let folder = game.folders.find(f => f.name === "Minor Arcana" && f.type === "Actor");
+  if (!folder) {
+    folder = await Folder.create({ name: "Minor Arcana", type: "Actor" });
+  }
+
+  for (const { name, path: img } of images) {
+    const existing = game.actors.find(a => a.type === "minor" && a.name === name && a.folder?.id === folder.id);
+    if (existing) {
+      if (existing.ownership.default !== CONST.DOCUMENT_OWNERSHIP_LEVELS.OBSERVER) {
+        await existing.update({ "ownership.default": CONST.DOCUMENT_OWNERSHIP_LEVELS.OBSERVER });
+      }
+      continue;
+    }
+
+    await Actor.create({
+      name,
+      type: "minor",
+      img,
+      folder: folder.id,
+      ownership: { default: CONST.DOCUMENT_OWNERSHIP_LEVELS.OBSERVER },
+      system: {
+        flipped: false,
+        notes: ""
+      },
+      prototypeToken: {
+        name,
+        texture: { src: img },
+        width: 7,
+        height: 12,
+        disposition: CONST.TOKEN_DISPOSITIONS.NEUTRAL,
+        actorLink: true,
+        lockRotation: true,
+        movementAction: "blink",
+        displayName: CONST.TOKEN_DISPLAY_MODES.NONE,
+        displayBars: CONST.TOKEN_DISPLAY_MODES.NONE
+      }
+    });
+  }
+
+  console.log("Royal Blood | Minor Arcana actors ready.");
+}
+
+/**
+ * Find the arcana or minor actor matching a drawn card (by name).
  */
 function _findArcanaActor(card) {
-  return game.actors.find(a => a.type === "arcana" && a.name === card.name);
+  return game.actors.find(a => (a.type === "arcana" || a.type === "minor") && a.name === card.name);
 }
 
 /**
@@ -721,6 +802,52 @@ export async function drawToSpread() {
 // ─── Minor Arcana: Resolve ──────────────────────────────────────
 
 /**
+ * Place a minor arcana token face-down on the scene.
+ */
+async function _placeMinorToken(card, x, y) {
+  const actor = _findArcanaActor(card);
+  if (!actor) return null;
+
+  const backImg = await _getCardBackImg();
+  if (!backImg) {
+    ui.notifications.warn("No card back image found in cards/backs/ folder.");
+    return null;
+  }
+
+  const frontImg = _cardImg(card) || actor.prototypeToken.texture.src;
+  await actor.update({
+    "system.flipped": true,
+    "flags.royal-blood.frontImg": frontImg
+  });
+
+  const gridSize = canvas.dimensions.size;
+  const [token] = await canvas.scene.createEmbeddedDocuments("Token", [{
+    name: actor.name,
+    actorId: actor.id,
+    texture: { src: backImg },
+    width: CARD_TILE_WIDTH / gridSize,
+    height: CARD_TILE_HEIGHT / gridSize,
+    x,
+    y,
+    disposition: CONST.TOKEN_DISPOSITIONS.NEUTRAL,
+    displayName: CONST.TOKEN_DISPLAY_MODES.NONE,
+    displayBars: CONST.TOKEN_DISPLAY_MODES.NONE,
+    actorLink: true,
+    lockRotation: true,
+    movementAction: "blink",
+    flags: {
+      "royal-blood": {
+        isCard: true,
+        category: "minor",
+        cardName: card.name,
+        cardId: card.id
+      }
+    }
+  }]);
+  return token;
+}
+
+/**
  * Draw a Minor Arcana card to resolve an action.
  */
 export async function drawToResolve() {
@@ -742,7 +869,11 @@ export async function drawToResolve() {
   const card = table.cards.contents[table.cards.contents.length - 1];
   if (!card) return;
 
-  await _postCardToChat(card);
+  const center = _viewportCenter();
+  const tokenX = center.x - CARD_TILE_WIDTH / 2;
+  const tokenY = center.y - CARD_TILE_HEIGHT / 2;
+
+  await _placeMinorToken(card, tokenX, tokenY);
 }
 
 /**
@@ -770,25 +901,17 @@ export async function drawMultiple(count = 3) {
 
   const newCards = table.cards.contents.slice(beforeCount);
 
-  const cardHtml = newCards.map(card => {
-    const img = _cardImg(card);
-    return `
-      <div style="display:inline-block; text-align:center; margin:4px;">
-        ${img ? `<img src="${img}" style="max-width:140px; border:1px solid #333; border-radius:4px;" />` : ""}
-        <p style="margin:4px 0 0; font-size:12px; font-weight:600;">${card.name}</p>
-      </div>`;
-  }).join("");
+  // Place tokens face-down on the scene, spaced horizontally
+  const center = _viewportCenter();
+  const totalWidth = count * CARD_TILE_WIDTH + (count - 1) * NOTE_SPACING;
+  const startX = center.x - totalWidth / 2;
+  const tokenY = center.y - CARD_TILE_HEIGHT / 2;
 
-  await ChatMessage.create({
-    content: `
-      <div style="text-align:center;">
-        <h3 style="font-variant:small-caps; margin:0 0 8px;">Fate draws ${count} cards</h3>
-        <div>${cardHtml}</div>
-        <p style="font-size:11px; color:#666; margin:8px 0 0;">You choose one, Fate chooses another — resolve both at once.</p>
-      </div>`,
-    speaker: { alias: "Fate Herself" },
-    whisper: []
-  });
+  for (let i = 0; i < newCards.length; i++) {
+    const tokenX = startX + i * (CARD_TILE_WIDTH + NOTE_SPACING);
+    await _placeMinorToken(newCards[i], tokenX, tokenY);
+  }
+
 }
 
 // ─── Cleanup ────────────────────────────────────────────────────
@@ -819,8 +942,10 @@ export async function shuffleMajor() {
     }
   }
 
-  // Clear notes and flipped state on all arcana actors
-  const arcanaActors = game.actors.filter(a => a.type === "arcana" && (a.system.notes || a.system.flipped));
+  // Clear notes and flipped state on all arcana and minor actors
+  const arcanaActors = game.actors.filter(a =>
+    (a.type === "arcana" || a.type === "minor") && (a.system.notes || a.system.flipped)
+  );
   for (const actor of arcanaActors) {
     await actor.update({ "system.notes": "", "system.flipped": false });
   }
@@ -856,6 +981,20 @@ export async function shuffleMinor() {
     return;
   }
 
+  // Clear minor arcana tokens from the scene
+  if (canvas.scene) {
+    const minorTokens = canvas.scene.tokens.filter(t => t.flags?.["royal-blood"]?.category === "minor");
+    if (minorTokens.length > 0) {
+      await canvas.scene.deleteEmbeddedDocuments("Token", minorTokens.map(t => t.id));
+    }
+  }
+
+  // Reset flipped state on all minor actors
+  const minorActors = game.actors.filter(a => a.type === "minor" && a.system.flipped);
+  for (const actor of minorActors) {
+    await actor.update({ "system.flipped": false });
+  }
+
   await deck.recall();
   await deck.shuffle();
 
@@ -868,12 +1007,60 @@ export async function shuffleMinor() {
 }
 
 /**
+ * Merge unchosen court cards into the Minor Arcana deck.
+ * Skips any court card whose name matches a character actor's rank (i.e. chosen cards).
+ */
+export async function mergeCourtCards() {
+  const courtDeck = _findDeck("court");
+  const minorDeck = _findDeck("minor");
+  if (!courtDeck) {
+    ui.notifications.warn("No Court Cards deck found.");
+    return;
+  }
+  if (!minorDeck) {
+    ui.notifications.warn("No Minor Arcana deck found.");
+    return;
+  }
+
+  // Find court card names that are assigned to characters
+  const chosenNames = new Set(
+    game.actors.filter(a => a.type === "character" && a.system.rank)
+      .map(a => a.system.rank)
+  );
+
+  let merged = 0;
+  for (const card of courtDeck.availableCards) {
+    if (chosenNames.has(card.name)) continue;
+    const alreadyInMinor = minorDeck.cards.some(c => c.name === card.name);
+    if (alreadyInMinor) continue;
+    try {
+      await courtDeck.pass(minorDeck, [card.id]);
+      merged++;
+    } catch (e) {
+      console.warn(`Royal Blood | Could not pass card ${card.name} to minor deck:`, e);
+    }
+  }
+
+  await minorDeck.shuffle();
+
+  await ChatMessage.create({
+    content: `<p style="text-align:center; font-variant:small-caps;"><strong>${merged} court card(s)</strong> merged into the Minor Arcana deck.</p>`,
+    speaker: { alias: "Fate Herself" },
+    whisper: []
+  });
+  ui.notifications.info(`${merged} court card(s) merged into Minor Arcana.`);
+}
+
+/**
  * Reset everything — clear all card tiles, recall both decks, shuffle.
  */
 export async function resetAll() {
   if (canvas.scene) {
-    // Clear spread tokens, note tiles, and legacy drawings
-    const tokens = canvas.scene.tokens.filter(t => t.flags?.["royal-blood"]?.category === "spread");
+    // Clear spread and minor tokens, note tiles, and legacy drawings
+    const tokens = canvas.scene.tokens.filter(t => {
+      const cat = t.flags?.["royal-blood"]?.category;
+      return cat === "spread" || cat === "minor";
+    });
     if (tokens.length > 0) {
       await canvas.scene.deleteEmbeddedDocuments("Token", tokens.map(t => t.id));
     }
@@ -889,8 +1076,10 @@ export async function resetAll() {
     }
   }
 
-  // Clear notes and flipped state on all arcana actors
-  const arcanaActors = game.actors.filter(a => a.type === "arcana" && (a.system.notes || a.system.flipped));
+  // Clear notes and flipped state on all arcana and minor actors
+  const arcanaActors = game.actors.filter(a =>
+    (a.type === "arcana" || a.type === "minor") && (a.system.notes || a.system.flipped)
+  );
   for (const actor of arcanaActors) {
     await actor.update({ "system.notes": "", "system.flipped": false });
   }
@@ -905,7 +1094,6 @@ export async function resetAll() {
     }
     // Reset all character fields to defaults
     await char.update({
-      "system.rank": "",
       "system.description": "",
       "system.royalLeft": { name: "", question: "", answer: "" },
       "system.royalRight": { name: "", question: "", answer: "" },
@@ -1053,8 +1241,8 @@ export async function flipIcon(token = null) {
 
   const tokenDoc = token.document ?? token;
   const actor = tokenDoc.actor ?? game.actors.get(tokenDoc.actorId);
-  if (!actor || actor.type !== "arcana") {
-    ui.notifications.warn("Selected token is not a Major Arcana icon.");
+  if (!actor || (actor.type !== "arcana" && actor.type !== "minor")) {
+    ui.notifications.warn("Selected token is not an Arcana icon.");
     return;
   }
 
@@ -1118,12 +1306,28 @@ export async function flipIcon(token = null) {
     if (tile) await tile.update({ alpha: 1 });
   }
 
-  const state = isFlipped ? "revealed" : "defeated";
-  await ChatMessage.create({
-    content: `<p style="text-align:center; font-variant:small-caps;"><strong>${actor.name}</strong> — ${state}.</p>`,
-    speaker: { alias: "Fate Herself" },
-    whisper: []
-  });
+  if (actor.type === "minor") {
+    // Only post to chat when revealing a minor card
+    if (isFlipped) {
+      const revealImg = actor.flags?.["royal-blood"]?.frontImg || actor.img;
+      await ChatMessage.create({
+        content: `
+          <div style="text-align:center;">
+            ${revealImg ? `<img src="${revealImg}" style="max-width:200px; border:1px solid #333; border-radius:4px;" />` : ""}
+            <p style="font-variant:small-caps; margin:4px 0 0;"><strong>${actor.name}</strong> — revealed.</p>
+          </div>`,
+        speaker: { alias: "Fate Herself" },
+        whisper: []
+      });
+    }
+  } else {
+    const state = isFlipped ? "revealed" : "defeated";
+    await ChatMessage.create({
+      content: `<p style="text-align:center; font-variant:small-caps;"><strong>${actor.name}</strong> — ${state}.</p>`,
+      speaker: { alias: "Fate Herself" },
+      whisper: []
+    });
+  }
 }
 
 /**
@@ -1624,20 +1828,20 @@ export function registerCardTileHook() {
     await tile.update({ "texture.src": imagePath + "?t=" + Date.now(), height });
   });
 
-  // Block non-GM movement of arcana tokens, and sync notes tile for GM moves
+  // Block non-GM movement of arcana/minor tokens, and sync notes tile for GM moves
   Hooks.on("preUpdateToken", (tokenDoc, changes) => {
     if (!("x" in changes || "y" in changes)) return;
     const actor = tokenDoc.actor;
-    if (!actor || actor.type !== "arcana") return;
+    if (!actor || (actor.type !== "arcana" && actor.type !== "minor")) return;
 
     if (!game.user.isGM) {
       delete changes.x;
       delete changes.y;
-      ui.notifications.warn("Only the GM can move Major Arcana tokens.");
+      ui.notifications.warn("Only the GM can move Arcana tokens.");
       return false;
     }
 
-    // Move the linked notes tile with the token
+    // Move the linked notes tile with the token (major arcana only)
     if (!canvas.scene) return;
     const tile = canvas.scene.tiles.find(
       t => t.flags?.["royal-blood"]?.isCardNote && t.flags?.["royal-blood"]?.actorId === actor.id
@@ -1654,39 +1858,52 @@ export function registerCardTileHook() {
     });
   });
 
-  // Add notes position buttons to the token HUD for arcana tokens
+  // Add HUD controls for arcana and minor arcana tokens
   Hooks.on("renderTokenHUD", (hud, html) => {
     const tokenDoc = hud.object?.document ?? hud.object;
     const actor = tokenDoc?.actor ?? game.actors.get(tokenDoc?.actorId);
-    if (!actor || actor.type !== "arcana") return;
+    if (!actor || (actor.type !== "arcana" && actor.type !== "minor")) return;
     if (!game.user.isGM) return;
-
-    const tile = canvas.scene?.tiles.find(
-      t => t.flags?.["royal-blood"]?.isCardNote && t.flags?.["royal-blood"]?.actorId === actor.id
-    );
-    if (!tile) return;
 
     const el = html instanceof HTMLElement ? html : html[0] ?? html;
     const gridSize = canvas.dimensions.size;
-    const pRight = tokenDoc.x + tokenDoc.width * gridSize;
-    const pLeft = tokenDoc.x;
-    const pTop = tokenDoc.y;
-    const pBottom = tokenDoc.y + tokenDoc.height * gridSize;
+    const isFlipped = actor.system.flipped;
 
-    const positions = {
-      left:  { x: pLeft - NOTE_WIDTH - NOTE_SPACING, y: pTop },
-      up:    { x: pLeft, y: pTop - tile.height - NOTE_SPACING },
-      down:  { x: pLeft, y: pBottom + NOTE_SPACING },
-      right: { x: pRight + NOTE_SPACING, y: pTop }
-    };
+    // For major arcana, include notes position buttons if notes tile exists
+    const tile = actor.type === "arcana" ? canvas.scene?.tiles.find(
+      t => t.flags?.["royal-blood"]?.isCardNote && t.flags?.["royal-blood"]?.actorId === actor.id
+    ) : null;
+
+    let notesButtons = "";
+    let positions = {};
+    if (tile) {
+      const pRight = tokenDoc.x + tokenDoc.width * gridSize;
+      const pLeft = tokenDoc.x;
+      const pTop = tokenDoc.y;
+      const pBottom = tokenDoc.y + tokenDoc.height * gridSize;
+      positions = {
+        left:  { x: pLeft - NOTE_WIDTH - NOTE_SPACING, y: pTop },
+        up:    { x: pLeft, y: pTop - tile.height - NOTE_SPACING },
+        down:  { x: pLeft, y: pBottom + NOTE_SPACING },
+        right: { x: pRight + NOTE_SPACING, y: pTop }
+      };
+      notesButtons = `
+        <button type="button" class="rb-notes-btn" data-dir="left" data-tooltip="Notes Left">&#9664;</button>
+        <button type="button" class="rb-notes-btn" data-dir="up" data-tooltip="Notes Above">&#9650;</button>
+        <button type="button" class="rb-notes-btn" data-dir="down" data-tooltip="Notes Below">&#9660;</button>
+        <button type="button" class="rb-notes-btn" data-dir="right" data-tooltip="Notes Right">&#9654;</button>
+      `;
+    }
+
+    const flipLabel = actor.type === "minor"
+      ? (isFlipped ? "Reveal Card" : "Flip Face-Down")
+      : (isFlipped ? "Reveal Icon" : "Defeat Icon");
 
     const wrapper = document.createElement("div");
     wrapper.classList.add("rb-notes-position");
     wrapper.innerHTML = `
-      <button type="button" class="rb-notes-btn" data-dir="left" data-tooltip="Notes Left">&#9664;</button>
-      <button type="button" class="rb-notes-btn" data-dir="up" data-tooltip="Notes Above">&#9650;</button>
-      <button type="button" class="rb-notes-btn" data-dir="down" data-tooltip="Notes Below">&#9660;</button>
-      <button type="button" class="rb-notes-btn" data-dir="right" data-tooltip="Notes Right">&#9654;</button>
+      ${notesButtons}
+      <button type="button" class="rb-notes-btn rb-flip-btn" data-action="flip" data-tooltip="${flipLabel}">&#8635;</button>
     `;
 
     wrapper.addEventListener("mousedown", (e) => {
@@ -1697,10 +1914,14 @@ export function registerCardTileHook() {
       btn.addEventListener("click", (e) => {
         e.preventDefault();
         e.stopPropagation();
+        if (btn.dataset.action === "flip") {
+          flipIcon(tokenDoc);
+          hud.close();
+          return;
+        }
         const dir = btn.dataset.dir;
         const pos = positions[dir];
         if (pos) {
-          console.log(`Royal Blood | Moving notes tile for ${actor.name} to ${dir}`, pos);
           tile.update({ x: pos.x, y: pos.y });
         }
       });
@@ -1740,6 +1961,7 @@ export function registerCardHelpers() {
   game.royalblood.drawMultiple = drawMultiple;
   game.royalblood.shuffleMajor = shuffleMajor;
   game.royalblood.shuffleMinor = shuffleMinor;
+  game.royalblood.mergeCourtCards = mergeCourtCards;
   game.royalblood.resetAll = resetAll;
   game.royalblood.chooseCharacters = chooseCharacters;
   game.royalblood.flipIcon = flipIcon;
@@ -1785,6 +2007,12 @@ export async function createCardMacros() {
       name: "Choose Characters",
       command: "game.royalblood.chooseCharacters();",
       img: "icons/svg/mystery-man.svg",
+      type: "script"
+    },
+    {
+      name: "Merge Court Cards",
+      command: "game.royalblood.mergeCourtCards();",
+      img: "icons/svg/card-hand.svg",
       type: "script"
     },
     {

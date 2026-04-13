@@ -1,7 +1,7 @@
 import { RoyalCharacterSheet } from "./sheets/RoyalCharacterSheet.mjs";
 import { RoyalTwistSheet } from "./sheets/RoyalTwistSheet.mjs";
 import { RoyalArcanaSheet } from "./sheets/RoyalArcanaSheet.mjs";
-import { registerCardHelpers, createCardMacros, registerCardTileHook, createArcanaActors, ensureUserDataFolders } from "./card-helpers.mjs";
+import { registerCardHelpers, createCardMacros, registerCardTileHook, createArcanaActors, createMinorArcanaActors, ensureUserDataFolders } from "./card-helpers.mjs";
 import { setupDecks, rebuildDecks } from "./deck-builder.mjs";
 import { registerCoinHelpers, registerCoinSocket, createCoinMacros } from "./coin-helpers.mjs";
 import { loadArcanaData } from "./major-arcana-data.mjs";
@@ -112,5 +112,6 @@ Hooks.once("ready", async () => {
     createCardMacros();
     createCoinMacros();
     createArcanaActors();
+    createMinorArcanaActors();
   }
 });
