@@ -1,0 +1,21 @@
+<div class="rb-hand-wrapper">
+  {{#if isEmpty}}
+    <p class="rb-hand-empty">Your hand is empty.</p>
+  {{else}}
+    <div class="rb-hand-grid">
+      {{#each cards}}
+        <div class="rb-hand-card-display">
+          {{#if img}}
+            <img src="{{img}}" />
+          {{else}}
+            <div class="rb-hand-placeholder"></div>
+          {{/if}}
+          <p>{{name}}</p>
+        </div>
+      {{/each}}
+    </div>
+  {{/if}}
+  <div class="rb-hand-actions">
+    <button type="button" class="rb-play-card-btn">Play Card</button>
+  </div>
+</div>

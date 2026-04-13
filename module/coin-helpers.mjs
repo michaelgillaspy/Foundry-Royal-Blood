@@ -267,19 +267,19 @@ export async function createCoinMacros() {
     {
       name: "Clear Coins",
       command: "game.royalblood.clearCoins();",
-      img: "icons/svg/cancel.svg",
+      img: "icons/svg/coins.svg",
       type: "script"
     },
     {
       name: "Give Coin",
       command: "game.royalblood.giveCoin();",
-      img: "icons/svg/chest.svg",
+      img: "icons/svg/coins.svg",
       type: "script"
     },
     {
       name: "Spend Coin",
       command: "game.royalblood.spendCoin();",
-      img: "icons/svg/tankard.svg",
+      img: "icons/svg/coins.svg",
       type: "script",
       ownership: { default: CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER }
     }

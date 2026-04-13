@@ -1,6 +1,6 @@
 {
   "Actor": {
-    "types": ["character", "coin", "arcana"],
+    "types": ["character", "coin", "arcana", "minor"],
     "character": {
       "rank": "",
       "description": "",
@@ -53,6 +53,10 @@
       "object": "",
       "notes": "",
       "flipped": false
+    },
+    "minor": {
+      "flipped": false,
+      "notes": ""
     }
   },
   "Item": {
