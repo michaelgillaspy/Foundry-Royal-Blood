@@ -2308,24 +2308,57 @@ export function registerCardHelpers() {
 
 export async function createCardMacros() {
   const macros = [
+    // Draw/deal actions
     {
       name: "Draw to Spread",
       command: "game.royalblood.drawToSpread();",
-      img: "icons/svg/sun.svg",
+      img: "icons/svg/card-hand.svg",
       type: "script"
     },
     {
       name: "Draw to Resolve",
       command: "game.royalblood.drawToResolve();",
-      img: "icons/svg/daze.svg",
+      img: "icons/svg/card-hand.svg",
       type: "script"
     },
     {
       name: "Draw 3 (Make Things Interesting)",
       command: "game.royalblood.drawMultiple(3);",
-      img: "icons/svg/card-joker.svg",
+      img: "icons/svg/card-hand.svg",
       type: "script"
     },
+    {
+      name: "Choose Characters",
+      command: "game.royalblood.chooseCharacters();",
+      img: "icons/svg/cowled.svg",
+      type: "script"
+    },
+    {
+      name: "Merge Court Cards",
+      command: "game.royalblood.mergeCourtCards();",
+      img: "icons/svg/card-hand.svg",
+      type: "script"
+    },
+    {
+      name: "Deal to Hand",
+      command: "game.royalblood.dealToHand();",
+      img: "icons/svg/card-hand.svg",
+      type: "script"
+    },
+    {
+      name: "Deal Initial Twist",
+      command: "game.royalblood.dealInitialTwist();",
+      img: "icons/svg/card-hand.svg",
+      type: "script"
+    },
+    {
+      name: "Play Card",
+      command: "game.royalblood.playCard();",
+      img: "icons/svg/card-hand.svg",
+      type: "script",
+      ownership: { default: CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER }
+    },
+    // Shuffle/reset
     {
       name: "Shuffle Major Arcana",
       command: "game.royalblood.shuffleMajor();",
@@ -2335,55 +2368,37 @@ export async function createCardMacros() {
     {
       name: "Shuffle Minor Arcana",
       command: "game.royalblood.shuffleMinor();",
-      img: "icons/svg/daze.svg",
+      img: "icons/svg/clockwork.svg",
       type: "script"
     },
     {
-      name: "Choose Characters",
-      command: "game.royalblood.chooseCharacters();",
-      img: "icons/svg/mystery-man.svg",
+      name: "Reset All",
+      command: "game.royalblood.resetAll();",
+      img: "icons/svg/clockwork.svg",
       type: "script"
     },
     {
-      name: "Merge Court Cards",
-      command: "game.royalblood.mergeCourtCards();",
-      img: "icons/svg/daze.svg",
+      name: "Rebuild Decks",
+      command: "game.royalblood.rebuildDecks();",
+      img: "icons/svg/clockwork.svg",
       type: "script"
     },
-    {
-      name: "Deal to Hand",
-      command: "game.royalblood.dealToHand();",
-      img: "icons/svg/daze.svg",
-      type: "script"
-    },
-    {
-      name: "Play Card",
-      command: "game.royalblood.playCard();",
-      img: "icons/svg/daze.svg",
-      type: "script",
-      ownership: { default: CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER }
-    },
-    {
-      name: "Reveal Trick",
-      command: "game.royalblood.revealTrick();",
-      img: "icons/svg/eye.svg",
-      type: "script"
-    },
+    // Utility
     {
       name: "Flip Icon",
       command: "game.royalblood.flipIcon();",
-      img: "icons/svg/circle.svg",
-      type: "script"
-    },
-    {
-      name: "Deal Initial Twist",
-      command: "game.royalblood.dealInitialTwist();",
-      img: "icons/svg/sun.svg",
+      img: "icons/svg/book.svg",
       type: "script"
     },
     {
       name: "Claim Icon",
       command: "game.royalblood.claimIcon();",
+      img: "icons/svg/book.svg",
+      type: "script"
+    },
+    {
+      name: "Reveal Trick",
+      command: "game.royalblood.revealTrick();",
       img: "icons/svg/book.svg",
       type: "script"
     },
@@ -2396,19 +2411,7 @@ export async function createCardMacros() {
     {
       name: "Switch Theme",
       command: "game.royalblood.switchTheme();",
-      img: "icons/svg/eye.svg",
-      type: "script"
-    },
-    {
-      name: "Reset All",
-      command: "game.royalblood.resetAll();",
-      img: "icons/svg/ruins.svg",
-      type: "script"
-    },
-    {
-      name: "Rebuild Decks",
-      command: "game.royalblood.rebuildDecks();",
-      img: "icons/svg/upgrade.svg",
+      img: "icons/svg/book.svg",
       type: "script"
     }
   ];
