@@ -590,6 +590,70 @@ body.royal-blood-light .royal-blood.sheet textarea::placeholder {
   min-height: 100px;
 }
 
+/* ─── Player Hand Sheet ─── */
+.royal-blood.sheet.hand .rb-hand-wrapper {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.royal-blood.sheet.hand .rb-hand-empty {
+  text-align: center;
+  font-style: italic;
+  color: var(--rb-text-muted);
+  padding: 24px;
+}
+
+.royal-blood.sheet.hand .rb-hand-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.royal-blood.sheet.hand .rb-hand-card-display {
+  text-align: center;
+  width: 120px;
+}
+
+.royal-blood.sheet.hand .rb-hand-card-display img {
+  width: 120px;
+  border-radius: 4px;
+  border: 1px solid var(--rb-border-light);
+}
+
+.royal-blood.sheet.hand .rb-hand-card-display p {
+  font-family: var(--rb-font);
+  font-variant: small-caps;
+  font-size: 12px;
+  margin: 4px 0 0;
+}
+
+.royal-blood.sheet.hand .rb-hand-placeholder {
+  width: 120px;
+  height: 180px;
+  background: #333;
+  border-radius: 4px;
+}
+
+.royal-blood.sheet.hand .rb-hand-actions {
+  padding-top: 10px;
+  text-align: center;
+  border-top: 1px solid var(--rb-border-light);
+  margin-top: 10px;
+}
+
+.royal-blood.sheet.hand .rb-play-card-btn {
+  font-family: var(--rb-font);
+  font-variant: small-caps;
+  font-size: 14px;
+  padding: 6px 24px;
+  cursor: pointer;
+}
+
 /* ─── Notes position controls on arcana token HUD ─── */
 .rb-notes-position {
   position: absolute;

@@ -1,6 +1,7 @@
 import { RoyalCharacterSheet } from "./sheets/RoyalCharacterSheet.mjs";
 import { RoyalTwistSheet } from "./sheets/RoyalTwistSheet.mjs";
 import { RoyalArcanaSheet } from "./sheets/RoyalArcanaSheet.mjs";
+// import { RoyalHandSheet } from "./sheets/RoyalHandSheet.mjs";
 import { registerCardHelpers, createCardMacros, registerCardTileHook, createArcanaActors, createMinorArcanaActors, ensureUserDataFolders } from "./card-helpers.mjs";
 import { setupDecks, rebuildDecks } from "./deck-builder.mjs";
 import { registerCoinHelpers, registerCoinSocket, createCoinMacros } from "./coin-helpers.mjs";
@@ -55,6 +56,45 @@ Hooks.once("init", () => {
     label: "ROYALBLOOD.SheetTwist"
   });
 
+  // Customize the default hand sheet — strip editing controls
+  Hooks.on("renderCardsConfig", (app, html) => {
+    const el = html instanceof HTMLElement ? html : html[0] ?? html;
+    const doc = app.document ?? app.object;
+    if (!doc || doc.type !== "hand") return;
+
+    const cards = doc.cards.contents;
+    const isEmpty = cards.length === 0;
+
+    const grid = isEmpty
+      ? `<p style="text-align:center; font-style:italic; padding:24px; color:#999;">Your hand is empty.</p>`
+      : `<div style="display:flex; flex-wrap:wrap; justify-content:center; gap:10px; padding:12px;">
+          ${cards.map(c => {
+            const img = c.faces?.[0]?.img || c.img || "";
+            return `<div style="text-align:center; width:120px;">
+              ${img ? `<img src="${img}" style="width:120px; border-radius:4px; border:1px solid #444;" />` : ""}
+              <p style="font-size:12px; margin:4px 0 0;">${c.name}</p>
+            </div>`;
+          }).join("")}
+        </div>`;
+
+    const playBtn = `<div style="text-align:center; padding:10px; border-top:1px solid #444;">
+      <button type="button" class="rb-play-from-hand" style="padding:6px 24px; cursor:pointer;">Play Card</button>
+    </div>`;
+
+    // Replace the window-content section
+    const body = el.querySelector("section.window-content");
+    if (body) {
+      body.innerHTML = grid + playBtn;
+      body.querySelector(".rb-play-from-hand")?.addEventListener("click", () => {
+        game.royalblood?.playCard();
+      });
+    }
+
+    // Remove the controls dropdown menu
+    const menu = el.querySelector("menu.controls-dropdown");
+    if (menu) menu.remove();
+  });
+
   // Apply theme class to body
   _applyThemeClass();
 
@@ -64,7 +104,8 @@ Hooks.once("init", () => {
     "systems/royal-blood/templates/actor/character-front.hbs",
     "systems/royal-blood/templates/actor/character-back.hbs",
     "systems/royal-blood/templates/actor/arcana-sheet.hbs",
-    "systems/royal-blood/templates/item/twist-sheet.hbs"
+    "systems/royal-blood/templates/item/twist-sheet.hbs",
+    "systems/royal-blood/templates/cards/hand-sheet.hbs"
   ]);
 });
 
