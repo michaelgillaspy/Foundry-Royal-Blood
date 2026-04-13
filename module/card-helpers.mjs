@@ -1654,6 +1654,61 @@ export function registerCardTileHook() {
     });
   });
 
+  // Add notes position buttons to the token HUD for arcana tokens
+  Hooks.on("renderTokenHUD", (hud, html) => {
+    const tokenDoc = hud.object?.document ?? hud.object;
+    const actor = tokenDoc?.actor ?? game.actors.get(tokenDoc?.actorId);
+    if (!actor || actor.type !== "arcana") return;
+    if (!game.user.isGM) return;
+
+    const tile = canvas.scene?.tiles.find(
+      t => t.flags?.["royal-blood"]?.isCardNote && t.flags?.["royal-blood"]?.actorId === actor.id
+    );
+    if (!tile) return;
+
+    const el = html instanceof HTMLElement ? html : html[0] ?? html;
+    const gridSize = canvas.dimensions.size;
+    const pRight = tokenDoc.x + tokenDoc.width * gridSize;
+    const pLeft = tokenDoc.x;
+    const pTop = tokenDoc.y;
+    const pBottom = tokenDoc.y + tokenDoc.height * gridSize;
+
+    const positions = {
+      left:  { x: pLeft - NOTE_WIDTH - NOTE_SPACING, y: pTop },
+      up:    { x: pLeft, y: pTop - tile.height - NOTE_SPACING },
+      down:  { x: pLeft, y: pBottom + NOTE_SPACING },
+      right: { x: pRight + NOTE_SPACING, y: pTop }
+    };
+
+    const wrapper = document.createElement("div");
+    wrapper.classList.add("rb-notes-position");
+    wrapper.innerHTML = `
+      <button type="button" class="rb-notes-btn" data-dir="left" data-tooltip="Notes Left">&#9664;</button>
+      <button type="button" class="rb-notes-btn" data-dir="up" data-tooltip="Notes Above">&#9650;</button>
+      <button type="button" class="rb-notes-btn" data-dir="down" data-tooltip="Notes Below">&#9660;</button>
+      <button type="button" class="rb-notes-btn" data-dir="right" data-tooltip="Notes Right">&#9654;</button>
+    `;
+
+    wrapper.addEventListener("mousedown", (e) => {
+      e.stopPropagation();
+    });
+
+    wrapper.querySelectorAll(".rb-notes-btn").forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const dir = btn.dataset.dir;
+        const pos = positions[dir];
+        if (pos) {
+          console.log(`Royal Blood | Moving notes tile for ${actor.name} to ${dir}`, pos);
+          tile.update({ x: pos.x, y: pos.y });
+        }
+      });
+    });
+
+    el.appendChild(wrapper);
+  });
+
   // Intercept the tile config sheet for standalone notes — open our editor instead
   Hooks.on("renderTileConfig", (app, html, data) => {
     const tileDoc = app.document ?? app.object;
