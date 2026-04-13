@@ -1398,7 +1398,11 @@ export async function chooseCharacters() {
       prototypeToken: {
         name: card.name,
         texture: { src: img || "icons/svg/mystery-man.svg" },
+        width: 6,
+        height: 10,
         actorLink: true,
+        lockRotation: true,
+        movementAction: "blink",
         disposition: CONST.TOKEN_DISPOSITIONS.FRIENDLY,
         displayName: CONST.TOKEN_DISPLAY_MODES.NONE
       }

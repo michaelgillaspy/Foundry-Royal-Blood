@@ -111,7 +111,6 @@ Hooks.once("ready", async () => {
   if (game.user.isGM) {
     createCardMacros();
     createCoinMacros();
-    setupDecks();
     createArcanaActors();
   }
 });

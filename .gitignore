@@ -1,5 +1,6 @@
 # Copyrighted assets — not for distribution
 *.pdf
+cards/*.json
 cards/major/*.png
 cards/major/*.jpg
 cards/major/*.jpeg
