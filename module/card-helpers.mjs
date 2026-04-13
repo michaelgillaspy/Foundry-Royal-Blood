@@ -1997,6 +1997,17 @@ export async function switchTheme() {
   await game.settings.set("royal-blood", "theme", result);
   ui.notifications.info(`Theme switched to: ${THEMES[result].label}`);
 
+  // Update default drawing color to match theme border
+  const theme = THEMES[result];
+  try {
+    const defaults = game.settings.get("core", "defaultDrawingConfig") || {};
+    defaults.strokeColor = theme.border;
+    defaults.fillColor = theme.border;
+    await game.settings.set("core", "defaultDrawingConfig", defaults);
+  } catch {
+    // Setting may not exist in this Foundry version
+  }
+
   // Re-render all note tiles on the current scene
   if (canvas.scene) {
     const tiles = canvas.scene.tiles.filter(t =>
