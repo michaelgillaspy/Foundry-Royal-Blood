@@ -78,6 +78,22 @@ export async function placeCoin() {
     return;
   }
 
+  // Find the user's character and check coin balance
+  const actor = game.user.character || game.actors.find(a => a.type === "character" && a.isOwner);
+  if (!actor) {
+    ui.notifications.warn("No character found. Make sure you have an assigned character.");
+    return;
+  }
+
+  const current = actor.system.coins || 0;
+  if (current <= 0) {
+    ui.notifications.warn(`${actor.name} has no coins to place.`);
+    return;
+  }
+
+  // Deduct the coin from the character
+  await actor.update({ "system.coins": current - 1 });
+
   if (game.user.isGM) {
     await _placeCoinToken();
   } else {
@@ -86,6 +102,11 @@ export async function placeCoin() {
       data: _viewportCenter()
     });
   }
+
+  await ChatMessage.create({
+    content: `<p style="text-align:center; font-variant:small-caps;"><strong>${actor.name}</strong> places a coin. (${current - 1} remaining)</p>`,
+    speaker: ChatMessage.getSpeaker({ actor })
+  });
 }
 
 /**
