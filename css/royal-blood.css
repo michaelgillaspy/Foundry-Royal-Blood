@@ -590,6 +590,91 @@ body.royal-blood-light .royal-blood.sheet textarea::placeholder {
   min-height: 100px;
 }
 
+/* ─── Minor Arcana Sheet ─── */
+.royal-blood.sheet.minor .minor-header {
+  padding: 12px 16px;
+  border-bottom: 2px solid var(--rb-border);
+  text-align: center;
+}
+
+.royal-blood.sheet.minor .minor-name {
+  font-family: var(--rb-font);
+  font-variant: small-caps;
+  font-size: 24px;
+  margin: 0;
+}
+
+.royal-blood.sheet.minor .minor-subtitle {
+  font-family: var(--rb-font);
+  font-variant: small-caps;
+  font-size: 14px;
+  color: var(--rb-text-muted);
+  margin: 4px 0 0;
+  font-weight: normal;
+}
+
+.royal-blood.sheet.minor .minor-opposed {
+  font-size: 12px;
+  color: var(--rb-text-muted);
+  font-style: italic;
+  margin: 4px 0 0;
+}
+
+.royal-blood.sheet.minor .minor-body {
+  padding: 12px 16px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.royal-blood.sheet.minor .minor-touchstones {
+  margin-bottom: 16px;
+}
+
+.royal-blood.sheet.minor .minor-touchstones h3 {
+  font-family: var(--rb-font);
+  font-variant: small-caps;
+  font-size: 16px;
+  margin: 0 0 6px;
+  color: var(--rb-accent);
+  border-bottom: 1px solid var(--rb-border-light);
+  padding-bottom: 4px;
+}
+
+.royal-blood.sheet.minor .minor-touchstones ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.royal-blood.sheet.minor .minor-touchstones li {
+  font-size: 13px;
+  line-height: 1.5;
+  padding: 2px 0 2px 16px;
+  position: relative;
+}
+
+.royal-blood.sheet.minor .minor-touchstones li::before {
+  content: "\25C6";
+  position: absolute;
+  left: 0;
+  color: var(--rb-accent);
+}
+
+.royal-blood.sheet.minor .minor-empty {
+  text-align: center;
+  font-style: italic;
+  color: var(--rb-text-muted);
+  padding: 24px 12px;
+}
+
+.royal-blood.sheet.minor .minor-empty code {
+  font-family: monospace;
+  font-size: 11px;
+  background: rgba(0, 0, 0, 0.1);
+  padding: 1px 4px;
+  border-radius: 2px;
+}
+
 /* ─── Player Hand Sheet ─── */
 .royal-blood.sheet.hand .rb-hand-wrapper {
   padding: 12px;

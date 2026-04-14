@@ -1,11 +1,13 @@
 import { RoyalCharacterSheet } from "./sheets/RoyalCharacterSheet.mjs";
 import { RoyalTwistSheet } from "./sheets/RoyalTwistSheet.mjs";
 import { RoyalArcanaSheet } from "./sheets/RoyalArcanaSheet.mjs";
+import { RoyalMinorSheet } from "./sheets/RoyalMinorSheet.mjs";
 // import { RoyalHandSheet } from "./sheets/RoyalHandSheet.mjs";
 import { registerCardHelpers, createCardMacros, registerCardTileHook, createArcanaActors, createMinorArcanaActors, ensureUserDataFolders } from "./card-helpers.mjs";
 import { setupDecks, rebuildDecks } from "./deck-builder.mjs";
 import { registerCoinHelpers, registerCoinSocket, createCoinMacros } from "./coin-helpers.mjs";
 import { loadArcanaData } from "./major-arcana-data.mjs";
+import { loadTouchstones } from "./minor-arcana-data.mjs";
 
 const { ActorSheet: ActorSheetV1 } = foundry.appv1.sheets;
 const { ItemSheet: ItemSheetV1 } = foundry.appv1.sheets;
@@ -46,6 +48,11 @@ Hooks.once("init", () => {
     types: ["arcana"],
     makeDefault: true,
     label: "ROYALBLOOD.SheetArcana"
+  });
+  foundry.documents.collections.Actors.registerSheet("royal-blood", RoyalMinorSheet, {
+    types: ["minor"],
+    makeDefault: true,
+    label: "ROYALBLOOD.SheetMinor"
   });
 
   // Register item sheets
@@ -104,6 +111,7 @@ Hooks.once("init", () => {
     "systems/royal-blood/templates/actor/character-front.hbs",
     "systems/royal-blood/templates/actor/character-back.hbs",
     "systems/royal-blood/templates/actor/arcana-sheet.hbs",
+    "systems/royal-blood/templates/actor/minor-sheet.hbs",
     "systems/royal-blood/templates/item/twist-sheet.hbs",
     "systems/royal-blood/templates/cards/hand-sheet.hbs"
   ]);
@@ -135,8 +143,9 @@ Hooks.once("ready", async () => {
   // Create user data folder structure
   if (game.user.isGM) await ensureUserDataFolders();
 
-  // Load custom arcana data (if any) before creating actors
+  // Load custom arcana data and touchstones (if any) before creating actors
   await loadArcanaData();
+  await loadTouchstones();
 
   // Expose card helper functions on game.royalblood
   registerCardHelpers();
