@@ -1,0 +1,43 @@
+<div class="minor-wrapper">
+  <header class="sheet-header minor-header">
+    <h1 class="minor-name">{{actor.name}}</h1>
+    {{#if touchstones.element}}
+      <h2 class="minor-subtitle">{{touchstones.element}} &middot; {{touchstones.themes}}</h2>
+      {{#if touchstones.opposedBy}}
+        <p class="minor-opposed">Opposed by {{touchstones.opposedBy}}</p>
+      {{/if}}
+    {{/if}}
+  </header>
+
+  <section class="sheet-body minor-body">
+    {{#if touchstones}}
+      {{#if touchstones.lead.length}}
+        <div class="minor-touchstones">
+          <h3>Lead</h3>
+          <ul>
+            {{#each touchstones.lead}}
+              <li>{{this}}</li>
+            {{/each}}
+          </ul>
+        </div>
+      {{/if}}
+
+      {{#if touchstones.silver.length}}
+        <div class="minor-touchstones">
+          <h3>Silver</h3>
+          <ul>
+            {{#each touchstones.silver}}
+              <li>{{this}}</li>
+            {{/each}}
+          </ul>
+        </div>
+      {{/if}}
+
+      {{#unless touchstones.lead.length}}{{#unless touchstones.silver.length}}
+        <p class="minor-empty">No touchstones defined for this suit. Drop a <code>touchstones.json</code> file in <code>royal-blood-files/cards/</code>.</p>
+      {{/unless}}{{/unless}}
+    {{else}}
+      <p class="minor-empty">No touchstones available.</p>
+    {{/if}}
+  </section>
+</div>
