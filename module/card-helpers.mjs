@@ -10,7 +10,7 @@ import { MAJOR_ARCANA, findArcanaData } from "./major-arcana-data.mjs";
 const CARD_TILE_WIDTH = 420;
 const CARD_TILE_HEIGHT = 720;
 const NOTE_WIDTH = 420;
-const NOTE_SPACING = 20;
+const NOTE_SPACING = 60;
 const USER_DATA = "royal-blood-files";
 const NOTES_FOLDER = `${USER_DATA}/notes`;
 const BACKS_FOLDER_USER = `${USER_DATA}/cards/backs`;
