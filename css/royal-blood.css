@@ -100,6 +100,11 @@ body.royal-blood-light .royal-blood.sheet textarea::placeholder {
   color: var(--rb-text);
 }
 
+.royal-blood.sheet.character {
+  min-width: 800px;
+  max-width: 800px;
+}
+
 .royal-blood.sheet .window-content {
   color: var(--rb-text);
   background: var(--rb-bg);
@@ -141,8 +146,9 @@ body.royal-blood-light .royal-blood.sheet textarea::placeholder {
   margin-bottom: 2px;
 }
 
-/* --- Sheet Header --- */
-.royal-blood .sheet-header {
+/* --- Sheet Header / Character Info --- */
+.royal-blood .sheet-header,
+.royal-blood .character-info {
   padding: 10px 12px;
   border-bottom: 2px solid var(--rb-border);
   width: 100%;
@@ -150,6 +156,7 @@ body.royal-blood-light .royal-blood.sheet textarea::placeholder {
   display: flex;
   gap: 12px;
   align-items: flex-start;
+  margin-bottom: 12px;
 }
 
 .royal-blood .court-card-portrait {
@@ -239,6 +246,7 @@ body.royal-blood-light .royal-blood.sheet textarea::placeholder {
 }
 
 .royal-blood.sheet .tab.front,
+.royal-blood.sheet .tab.royals,
 .royal-blood.sheet .tab.back {
   padding: 12px;
 }

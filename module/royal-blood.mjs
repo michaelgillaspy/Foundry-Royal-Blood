@@ -109,6 +109,7 @@ Hooks.once("init", () => {
   foundry.applications.handlebars.loadTemplates([
     "systems/royal-blood/templates/actor/character-header.hbs",
     "systems/royal-blood/templates/actor/character-front.hbs",
+    "systems/royal-blood/templates/actor/character-royals.hbs",
     "systems/royal-blood/templates/actor/character-back.hbs",
     "systems/royal-blood/templates/actor/arcana-sheet.hbs",
     "systems/royal-blood/templates/actor/minor-sheet.hbs",

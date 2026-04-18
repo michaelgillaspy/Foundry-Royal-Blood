@@ -1,0 +1,38 @@
+<section class="tab royals {{tab.cssClass}}" data-group="primary" data-tab="royals">
+
+  {{!-- Royals Row: 2 columns --}}
+  <div class="royals-row">
+    <div class="royal-box">
+      <h2>{{localize "ROYALBLOOD.RoyalToYourLeft"}}</h2>
+      <div class="field">
+        <label>{{localize "ROYALBLOOD.Name"}}</label>
+        <input type="text" name="system.royalLeft.name" value="{{system.royalLeft.name}}"/>
+      </div>
+      <div class="field">
+        <label>{{localize "ROYALBLOOD.Question"}}</label>
+        <textarea name="system.royalLeft.question" rows="2">{{system.royalLeft.question}}</textarea>
+      </div>
+      <div class="field">
+        <label>{{localize "ROYALBLOOD.TheirAnswer"}}</label>
+        <textarea name="system.royalLeft.answer" rows="2">{{system.royalLeft.answer}}</textarea>
+      </div>
+    </div>
+
+    <div class="royal-box">
+      <h2>{{localize "ROYALBLOOD.RoyalToYourRight"}}</h2>
+      <div class="field">
+        <label>{{localize "ROYALBLOOD.Name"}}</label>
+        <input type="text" name="system.royalRight.name" value="{{system.royalRight.name}}"/>
+      </div>
+      <div class="field">
+        <label>{{localize "ROYALBLOOD.Question"}}</label>
+        <textarea name="system.royalRight.question" rows="2">{{system.royalRight.question}}</textarea>
+      </div>
+      <div class="field">
+        <label>{{localize "ROYALBLOOD.TheirAnswer"}}</label>
+        <textarea name="system.royalRight.answer" rows="2">{{system.royalRight.answer}}</textarea>
+      </div>
+    </div>
+  </div>
+
+</section>

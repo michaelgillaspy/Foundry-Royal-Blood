@@ -34,6 +34,10 @@ export class RoyalCharacterSheet extends HandlebarsApplicationMixin(ActorSheetV2
       template: "systems/royal-blood/templates/actor/character-front.hbs",
       scrollable: [""]
     },
+    royals: {
+      template: "systems/royal-blood/templates/actor/character-royals.hbs",
+      scrollable: [""]
+    },
     back: {
       template: "systems/royal-blood/templates/actor/character-back.hbs",
       scrollable: [""]
@@ -44,6 +48,7 @@ export class RoyalCharacterSheet extends HandlebarsApplicationMixin(ActorSheetV2
     primary: {
       tabs: [
         { id: "front", group: "primary", icon: "", label: "ROYALBLOOD.TabFront" },
+        { id: "royals", group: "primary", icon: "", label: "ROYALBLOOD.TabRoyals" },
         { id: "back", group: "primary", icon: "", label: "ROYALBLOOD.TabBack" }
       ],
       initial: "front"
@@ -73,7 +78,7 @@ export class RoyalCharacterSheet extends HandlebarsApplicationMixin(ActorSheetV2
     partContext.actor = context.actor;
     partContext.twists = context.twists;
     partContext.tabs = context.tabs;
-    partContext.tab = partContext.tabs[partId];
+    partContext.tab = partContext.tabs[partId] || partContext.tabs.royals;
     return partContext;
   }
 
