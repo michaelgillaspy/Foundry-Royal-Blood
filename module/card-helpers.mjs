@@ -125,7 +125,7 @@ async function _ensureBgFolder() {
 async function _renderSceneBackground(sceneWidth, sceneHeight) {
   const theme = _getTheme();
   // Cap render resolution for performance
-  const maxDim = 4096;
+  const maxDim = 8192;
   const ratio = Math.min(1, maxDim / Math.max(sceneWidth, sceneHeight));
   const w = Math.round(sceneWidth * ratio);
   const h = Math.round(sceneHeight * ratio);
@@ -2290,7 +2290,7 @@ export function registerCardTileHook() {
     const width = scene.width || 4000;
     const height = scene.height || 3000;
     const bgPath = await _uploadSceneBackground(scene.name, width, height);
-    await scene.update({ "background.src": bgPath });
+    await scene.update({ "background.src": bgPath, width, height });
     console.log(`Royal Blood | Generated parchment background for scene: ${scene.name}`);
   });
 }

@@ -121,8 +121,8 @@ Hooks.once("init", () => {
 // Default new scenes to invisible grid and unrestricted vision
 Hooks.on("preCreateScene", (scene) => {
   scene.updateSource({
-    width: 5040,
-    height: 5040,
+    width: 6000,
+    height: 6000,
     "grid.size": 60,
     "grid.alpha": 0,
     "environment.globalLight.enabled": true,
