@@ -85,6 +85,18 @@ const THEMES = {
     headerText: "#c0c0c0",
     placeholder: "#aaa",
     speckleColor: "#ccc"
+  },
+  royal: {
+    label: "Royal",
+    sceneBg: "#2a1a3a",
+    noteBg: "#3d2555",
+    border: "#c0c0c0",
+    accent: "#c0c0c0",
+    text: "#e8e4dc",
+    headerBg: "#c0c0c0",
+    headerText: "#2a1a3a",
+    placeholder: "#a090b0",
+    speckleColor: "#4a3060"
   }
 };
 

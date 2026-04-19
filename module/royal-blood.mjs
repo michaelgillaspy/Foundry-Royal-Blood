@@ -14,7 +14,7 @@ const { ItemSheet: ItemSheetV1 } = foundry.appv1.sheets;
 
 function _applyThemeClass() {
   const theme = game.settings.get("royal-blood", "theme") ?? "parchment";
-  document.body.classList.remove("royal-blood-parchment", "royal-blood-dark", "royal-blood-light");
+  document.body.classList.remove("royal-blood-parchment", "royal-blood-dark", "royal-blood-light", "royal-blood-royal");
   document.body.classList.add(`royal-blood-${theme}`);
 }
 
@@ -31,7 +31,8 @@ Hooks.once("init", () => {
     choices: {
       parchment: "Parchment (cream + gold)",
       dark: "Dark (black + silver)",
-      light: "Light (white + silver)"
+      light: "Light (white + silver)",
+      royal: "Royal (purple + silver)"
     },
     default: "parchment",
     onChange: () => _applyThemeClass()

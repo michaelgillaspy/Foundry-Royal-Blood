@@ -82,6 +82,24 @@ body.royal-blood-light .royal-blood.sheet textarea::placeholder {
   color: var(--rb-text-muted);
 }
 
+body.royal-blood-royal {
+  --rb-bg: #3d2555;
+  --rb-bg-dark: #2a1a3a;
+  --rb-text: #e8e4dc;
+  --rb-text-muted: #a090b0;
+  --rb-border: #c0c0c0;
+  --rb-border-light: #6b4590;
+  --rb-accent: #c0c0c0;
+  --rb-highlight: #c0c0c0;
+  --rb-danger: #ff6666;
+  --rb-card-bg: #2a1a3a;
+}
+
+body.royal-blood-royal .royal-blood.sheet input::placeholder,
+body.royal-blood-royal .royal-blood.sheet textarea::placeholder {
+  color: var(--rb-text-muted);
+}
+
 /* --- Base Sheet --- */
 .royal-blood.sheet {
   font-family: var(--rb-font);
